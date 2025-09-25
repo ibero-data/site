@@ -43,7 +43,9 @@ export default function ContactForm({ translations }: ContactFormProps) {
     setStatus('loading');
 
     try {
-      const response = await fetch('/api/contact', {
+      // For GitHub Pages, we'll use Formspree or another service
+      // You can sign up at https://formspree.io/ for free
+      const response = await fetch('https://formspree.io/f/YOUR_FORM_ID', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

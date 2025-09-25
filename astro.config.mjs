@@ -33,6 +33,7 @@ export default defineConfig({
 			prefixDefaultLocale: false
 		}
 	},
-	output: 'hybrid',
-	site: 'https://ibero-data.github.io'
+	output: 'static',
+	site: 'https://ibero-data.github.io',
+	base: '/'
 });
