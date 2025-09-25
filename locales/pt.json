@@ -1,0 +1,70 @@
+{
+  "header": {
+    "home": "Início",
+    "services": "Serviços",
+    "about": "Sobre",
+    "contact": "Contato",
+    "mobileMenuDescription": "Ibero Data - Potencializando Soluções Orientadas por Dados"
+  },
+  "hero": {
+    "title": "Potencializando Soluções Orientadas por Dados",
+    "subtitle": "Especializados em Engenharia de Dados Open-Source e Conectores Personalizados"
+  },
+  "cta": {
+    "getInTouch": "Entre em Contato"
+  },
+  "services": {
+    "title": "Nossos Serviços",
+    "dataEngineering": "Engenharia de Dados",
+    "dataEngineeringDesc": "Projetamos e implementamos pipelines e arquiteturas de dados robustas.",
+    "customConnectors": "Conectores de Dados Personalizados",
+    "customConnectorsDesc": "Desenvolvemos conectores sob medida para fontes e destinos de dados únicos.",
+    "dataManagement": "Gestão de Dados",
+    "dataManagementDesc": "Otimizamos seus fluxos de trabalho e garantimos integração perfeita.",
+    "openSource": "Orientação Open-Source",
+    "openSourceDesc": "Consultoria especializada em tecnologias, ferramentas e plataformas de código aberto.",
+    "dataAnalysis": "Análise de Dados",
+    "dataAnalysisDesc": "Extraímos insights acionáveis dos seus dados para decisões informadas.",
+    "consulting": "Consultoria",
+    "consultingDesc": "Aconselhamento estratégico para navegar no complexo cenário de dados.",
+    "training": "Treinamento",
+    "trainingDesc": "Capacitamos sua equipe com habilidades para gerenciar dados efetivamente.",
+    "development": "Desenvolvimento",
+    "developmentDesc": "Desenvolvimento de software personalizado para atender seus requisitos específicos."
+  },
+  "about": {
+    "title": "Dê sentido aos seus Dados...",
+    "description": "Na Ibero-Data sabemos que os dados são a alma do seu negócio. Nossa missão é ajudá-lo a aproveitar o poder dos dados para impulsionar crescimento e inovação. Sabemos como fazer engenharia de dados e conectores personalizados, fornecendo soluções escaláveis e econômicas adaptadas às suas necessidades únicas. Desde consultoria estratégica até treinamento prático. Estamos com você."
+  },
+  "reasons": {
+    "costEfficiency": "Eficiência",
+    "costEfficiencyDesc": "Otimize suas soluções de dados sem estourar o orçamento.",
+    "scalability": "Escalabilidade",
+    "scalabilityDesc": "Soluções que crescem com as necessidades do seu negócio.",
+    "simple": "Simplificar",
+    "simpleDesc": "Otimizamos fluxos de trabalho para máxima eficiência com soluções simples.",
+    "customizedSolutions": "Soluções Personalizadas",
+    "customizedSolutionsDesc": "Abordagens sob medida para enfrentar seus desafios únicos"
+  },
+  "contact": {
+    "title": "Entre em Contato",
+    "description": "Pronto para dar o próximo passo? Escreva-nos e vamos discutir como podemos ajudá-lo a alcançar seus objetivos de dados.",
+    "name": "Seu Nome",
+    "namePlaceholder": "João Silva",
+    "nameRequired": "O nome é obrigatório",
+    "email": "Seu Email",
+    "emailPlaceholder": "eu@exemplo.com",
+    "emailRequired": "O email é obrigatório",
+    "message": "Sua Mensagem",
+    "messagePlaceholder": "Como podemos ajudá-lo?",
+    "messageMinLength": "A mensagem é obrigatória, mínimo 20 caracteres",
+    "submit": "Enviar Mensagem",
+    "sending": "Enviando Mensagem",
+    "success": "Mensagem enviada com sucesso!",
+    "error": "Desculpe, algo deu errado",
+    "retry": "Tentar novamente"
+  },
+  "footer": {
+    "allRightsReserved": "Todos os direitos reservados."
+  }
+}

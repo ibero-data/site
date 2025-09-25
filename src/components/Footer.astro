@@ -1,0 +1,77 @@
+---
+import { getLangFromUrl, getTranslations } from "../lib/i18n";
+import { Github, Linkedin } from "lucide-react";
+
+const lang = getLangFromUrl(Astro.url);
+const t = getTranslations(lang);
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="bg-gradient-to-r from-gray-900 to-gray-950 text-white py-12">
+  <div class="container mx-auto px-6">
+    <div class="flex flex-col md:flex-row items-center justify-between">
+      <!-- Logo and Copyright -->
+      <div class="flex items-center space-x-3 mb-6 md:mb-0 justify-center md:justify-start b">
+        <img src="/logo.png" alt="Ibero Data" class="h-8 w-auto" />
+        <div>
+          <p class="text-sm text-gray-400 text-center md:text-left">
+            Ibero Data © {currentYear}
+            {t.footer.allRightsReserved}
+          </p>
+        </div>
+      </div>
+
+      <!-- Quick Links -->
+      <div class="flex space-x-8 mb-6 md:mb-0">
+        <a
+          href="#home"
+          class="text-gray-400 hover:text-ibero-yellow transition-colors"
+        >
+          {t.header.home}
+        </a>
+        <a
+          href="#services"
+          class="text-gray-400 hover:text-ibero-yellow transition-colors"
+        >
+          {t.header.services}
+        </a>
+        <a
+          href="#about"
+          class="text-gray-400 hover:text-ibero-yellow transition-colors"
+        >
+          {t.header.about}
+        </a>
+        <a
+          href="#contact"
+          class="text-gray-400 hover:text-ibero-yellow transition-colors"
+        >
+          {t.header.contact}
+        </a>
+      </div>
+
+      <!-- Social Links -->
+      <div class="flex space-x-4">
+        <a
+          href="https://github.com/ibero-data"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="p-3 bg-white/10 rounded-lg hover:bg-ibero-yellow/20 transition-colors group"
+        >
+          <Github
+            className="w-5 h-5 text-gray-400 group-hover:text-ibero-yellow"
+          />
+        </a>
+        <a
+          href="https://www.linkedin.com/company/iberodata/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="p-3 bg-white/10 rounded-lg hover:bg-ibero-yellow/20 transition-colors group"
+        >
+          <Linkedin
+            className="w-5 h-5 text-gray-400 group-hover:text-ibero-yellow"
+          />
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>

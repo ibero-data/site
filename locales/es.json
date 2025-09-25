@@ -1,0 +1,70 @@
+{
+  "header": {
+    "home": "Inicio",
+    "services": "Servicios",
+    "about": "Nosotros",
+    "contact": "Contacto",
+    "mobileMenuDescription": "Ibero Data - Potenciando Soluciones Basadas en Datos"
+  },
+  "hero": {
+    "title": "Potenciando Soluciones Basadas en Datos",
+    "subtitle": "Especializados en Ingeniería de Datos Open-Source y Conectores Personalizados"
+  },
+  "cta": {
+    "getInTouch": "Contáctanos"
+  },
+  "services": {
+    "title": "Nuestros Servicios",
+    "dataEngineering": "Ingeniería de Datos",
+    "dataEngineeringDesc": "Diseñamos e implementamos pipelines y arquitecturas de datos robustos.",
+    "customConnectors": "Conectores de Datos Personalizados",
+    "customConnectorsDesc": "Desarrollamos conectores a medida para fuentes y destinos de datos únicos.",
+    "dataManagement": "Gestión de Datos",
+    "dataManagementDesc": "Optimizamos tus flujos de trabajo de datos y aseguramos integración perfecta.",
+    "openSource": "Orientación Open-Source",
+    "openSourceDesc": "Asesoramiento experto en tecnologías, herramientas y plataformas de código abierto.",
+    "dataAnalysis": "Análisis de Datos",
+    "dataAnalysisDesc": "Extraemos insights accionables de tus datos, impulsando decisiones informadas.",
+    "consulting": "Consultoría",
+    "consultingDesc": "Asesoramiento estratégico para navegar el complejo panorama de datos.",
+    "training": "Capacitación",
+    "trainingDesc": "Empoderamos a tu equipo con las habilidades para gestionar tus datos eficazmente.",
+    "development": "Desarrollo",
+    "developmentDesc": "Desarrollo de software personalizado para cumplir tus requisitos específicos."
+  },
+  "about": {
+    "title": "Dale sentido a tus Datos...",
+    "description": "En Ibero-Data sabemos que los datos son el alma de tu negocio. Nuestra misión es ayudarte a aprovechar el poder de los datos para impulsar el crecimiento y la innovación. Sabemos cómo hacer ingeniería de datos y conectores personalizados, proporcionando soluciones escalables y rentables adaptadas a tus necesidades únicas. Desde consultoría estratégica hasta capacitación práctica. Te respaldamos."
+  },
+  "reasons": {
+    "costEfficiency": "Eficiencia",
+    "costEfficiencyDesc": "Optimiza tus soluciones de datos sin romper tu presupuesto.",
+    "scalability": "Escalabilidad",
+    "scalabilityDesc": "Soluciones que crecen con las necesidades de tu negocio.",
+    "simple": "Hazlo simple",
+    "simpleDesc": "Optimiza tus flujos de trabajo para máxima eficiencia, con soluciones simples y efectivas.",
+    "customizedSolutions": "Soluciones Personalizadas",
+    "customizedSolutionsDesc": "Enfoques adaptados para enfrentar tus desafíos únicos"
+  },
+  "contact": {
+    "title": "Ponte en Contacto",
+    "description": "¿Listo para dar el siguiente paso? Escríbenos y discutamos cómo podemos ayudarte a alcanzar tus objetivos de datos.",
+    "name": "Tu Nombre",
+    "namePlaceholder": "Juan Pérez",
+    "nameRequired": "El nombre es requerido",
+    "email": "Tu Correo",
+    "emailPlaceholder": "yo@ejemplo.com",
+    "emailRequired": "El correo es requerido",
+    "message": "Tu Mensaje",
+    "messagePlaceholder": "¿Cómo podemos ayudarte?",
+    "messageMinLength": "El mensaje es requerido, mínimo 20 caracteres",
+    "submit": "Enviar Mensaje",
+    "sending": "Enviando Mensaje",
+    "success": "¡Mensaje enviado exitosamente!",
+    "error": "Lo sentimos, algo salió mal",
+    "retry": "Intenta de nuevo"
+  },
+  "footer": {
+    "allRightsReserved": "Todos los derechos reservados."
+  }
+}

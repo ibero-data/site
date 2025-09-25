@@ -1,0 +1,20 @@
+# Robots.txt for Ibero Data
+# https://ibero-data.github.io
+
+# Allow all bots
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://ibero-data.github.io/sitemap-index.xml
+
+# Crawl delay (in seconds) - be respectful to search engines
+Crawl-delay: 1
+
+# Disallow access to API endpoints
+Disallow: /api/
+
+# Google specific
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0

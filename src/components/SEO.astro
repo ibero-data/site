@@ -1,0 +1,146 @@
+---
+import { getLangFromUrl, getTranslations } from '../lib/i18n';
+
+export interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  canonical?: string;
+  type?: string;
+}
+
+const {
+  title = 'Ibero Data - Empowering Data-Driven Solutions',
+  description = 'Specializing in Open-Source Data Engineering and Custom Connectors. Transform your data into meaningful insights.',
+  image = '/og-image.png',
+  canonical,
+  type = 'website'
+} = Astro.props;
+
+const lang = getLangFromUrl(Astro.url);
+const t = getTranslations(lang);
+const currentUrl = Astro.url.toString();
+const canonicalURL = canonical || currentUrl;
+
+// Language alternatives for hreflang
+const languages = ['en', 'es', 'pt', 'it'];
+const baseUrl = 'https://ibero-data.github.io';
+
+// Structured Data - Organization
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Ibero Data",
+  "url": baseUrl,
+  "logo": `${baseUrl}/logo.png`,
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "email": "info@iberodata.com",
+    "contactType": "customer service",
+    "availableLanguage": ["en", "es", "pt", "it"]
+  },
+  "sameAs": [
+    "https://github.com/ibero-data",
+    "https://www.linkedin.com/company/iberodata/"
+  ],
+  "description": description
+};
+
+// Structured Data - WebSite
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Ibero Data",
+  "url": baseUrl,
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": `${baseUrl}/?q={search_term_string}`,
+    "query-input": "required name=search_term_string"
+  }
+};
+
+// Structured Data - Service
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": "Ibero Data",
+  "image": `${baseUrl}/logo.png`,
+  "url": baseUrl,
+  "telephone": "+1-555-123-4567",
+  "address": {
+    "@type": "PostalAddress",
+    "addressCountry": "Global"
+  },
+  "geo": {
+    "@type": "GeoCircle",
+    "geoRadius": "20000000"
+  },
+  "serviceType": [
+    "Data Engineering",
+    "Custom Data Connectors",
+    "Data Management",
+    "Open Source Consulting",
+    "Data Analysis",
+    "Technical Training"
+  ],
+  "areaServed": {
+    "@type": "GeoCircle",
+    "geoRadius": "20000000"
+  }
+};
+---
+
+<!-- Primary Meta Tags -->
+<title>{title}</title>
+<meta name="title" content={title} />
+<meta name="description" content={description} />
+<meta name="keywords" content="data engineering, data connectors, open source, data analysis, ETL, data pipeline, business intelligence, data transformation, Ibero Data" />
+<meta name="author" content="Ibero Data" />
+<meta name="robots" content="index, follow" />
+<meta name="googlebot" content="index, follow" />
+<link rel="canonical" href={canonicalURL} />
+
+<!-- Language Alternates -->
+{languages.map(lng => (
+  <link
+    rel="alternate"
+    hreflang={lng}
+    href={`${baseUrl}${lng === 'en' ? '' : `/${lng}`}`}
+  />
+))}
+<link rel="alternate" hreflang="x-default" href={baseUrl} />
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content={type} />
+<meta property="og:url" content={currentUrl} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={`${baseUrl}${image}`} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:site_name" content="Ibero Data" />
+<meta property="og:locale" content={lang === 'en' ? 'en_US' : lang === 'es' ? 'es_ES' : lang === 'pt' ? 'pt_BR' : 'it_IT'} />
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:url" content={currentUrl} />
+<meta property="twitter:title" content={title} />
+<meta property="twitter:description" content={description} />
+<meta property="twitter:image" content={`${baseUrl}${image}`} />
+<meta property="twitter:site" content="@iberodata" />
+<meta property="twitter:creator" content="@iberodata" />
+
+<!-- Structured Data -->
+<script type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />
+<script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
+<script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
+
+<!-- Additional SEO Tags -->
+<meta name="theme-color" content="#AA151B" />
+<meta name="msapplication-TileColor" content="#AA151B" />
+<meta name="format-detection" content="telephone=no" />
+<meta http-equiv="x-ua-compatible" content="ie=edge" />
+
+<!-- Preconnect to External Domains -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="dns-prefetch" href="https://fonts.googleapis.com" />

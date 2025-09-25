@@ -1,0 +1,99 @@
+---
+import GlowingCard from './GlowingCard';
+import { Database, Link, Settings, BookOpen, BarChart3, Users, Lightbulb, Code } from 'lucide-react';
+import { getLangFromUrl, getTranslations } from '../lib/i18n';
+
+const lang = getLangFromUrl(Astro.url);
+const t = getTranslations(lang);
+
+const services = [
+  { icon: Database, title: t.services.dataEngineering, description: t.services.dataEngineeringDesc, color: 'from-red-500 to-orange-500' },
+  { icon: Link, title: t.services.customConnectors, description: t.services.customConnectorsDesc, color: 'from-orange-500 to-yellow-500' },
+  { icon: Settings, title: t.services.dataManagement, description: t.services.dataManagementDesc, color: 'from-yellow-500 to-amber-500' },
+  { icon: BookOpen, title: t.services.openSource, description: t.services.openSourceDesc, color: 'from-amber-500 to-red-500' },
+  { icon: BarChart3, title: t.services.dataAnalysis, description: t.services.dataAnalysisDesc, color: 'from-red-600 to-pink-500' },
+  { icon: Users, title: t.services.consulting, description: t.services.consultingDesc, color: 'from-pink-500 to-purple-500' },
+  { icon: Lightbulb, title: t.services.training, description: t.services.trainingDesc, color: 'from-purple-500 to-indigo-500' },
+  { icon: Code, title: t.services.development, description: t.services.developmentDesc, color: 'from-indigo-500 to-blue-500' },
+];
+---
+
+<section id="services" class="relative py-32 overflow-hidden">
+  <!-- Grid Pattern -->
+  <div
+    class="absolute inset-0 opacity-[0.03]"
+    style={{
+      backgroundImage: `linear-gradient(rgba(241, 191, 0, 0.3) 1px, transparent 1px),
+                       linear-gradient(90deg, rgba(241, 191, 0, 0.3) 1px, transparent 1px)`,
+      backgroundSize: '30px 30px'
+    }}
+  />
+
+  <div class="container mx-auto px-6 relative z-10">
+    <!-- Section Header -->
+    <div class="text-center mb-20">
+
+      <h2 class="text-5xl md:text-7xl font-black mb-6">
+        <span class="bg-gradient-to-r from-white via-gray-200 to-gray-400 bg-clip-text text-transparent">
+          Our
+        </span>
+        <span class="bg-gradient-to-r from-ibero-red via-orange-500 to-ibero-yellow bg-clip-text text-transparent px-4">
+          Services
+        </span>
+      </h2>
+
+      <p class="text-xl text-gray-400 max-w-3xl mx-auto">
+        Comprehensive data solutions tailored to transform your business
+      </p>
+    </div>
+
+    <!-- Services Grid -->
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+      {services.map((service, index) => (
+        <GlowingCard client:visible delay={index * 0.1}>
+          <div class="space-y-4">
+            <!-- Icon with Gradient Background -->
+            <div class={`relative inline-flex p-4 rounded-xl bg-gradient-to-br ${service.color} bg-opacity-10`}>
+              <service.icon className="w-8 h-8 text-white" />
+              <div class={`absolute inset-0 rounded-xl bg-gradient-to-br ${service.color} opacity-20 blur-xl`}></div>
+            </div>
+
+            <!-- Title -->
+            <h3 class="text-xl font-bold text-white">
+              {service.title}
+            </h3>
+
+            <!-- Description -->
+            <p class="text-gray-400 text-sm leading-relaxed">
+              {service.description}
+            </p>
+          </div>
+        </GlowingCard>
+      ))}
+    </div>
+
+    <!-- Bottom CTA -->
+    <div class="mt-20 text-center">
+      <div class="relative group">
+        <!-- Glow effect -->
+        <div class="absolute -inset-1 bg-gradient-to-r from-ibero-red to-ibero-yellow rounded-3xl blur-xl opacity-30 group-hover:opacity-50 transition duration-500"></div>
+
+        <div class="relative inline-flex flex-col items-center gap-6 px-12 py-10 bg-gray-950/90 backdrop-blur-xl rounded-3xl border border-white/10">
+          <h3 class="text-2xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+            Ready to Transform Your Data?
+          </h3>
+          <p class="text-lg text-gray-400 max-w-md">
+            Let's build something amazing together. Get in touch to discuss your project.
+          </p>
+          <button class="group/btn relative px-8 py-4 font-semibold text-white rounded-full overflow-hidden transition-all duration-300 hover:scale-105">
+            <div class="absolute inset-0 bg-gradient-to-r from-ibero-red via-orange-600 to-ibero-yellow transition-all duration-300"></div>
+            <a href="#contact" class="relative flex items-center gap-2">
+              Start Your Project
+              <span class="group-hover/btn:translate-x-1 transition-transform">→</span>
+            </a>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
