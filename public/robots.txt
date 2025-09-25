@@ -1,12 +1,12 @@
 # Robots.txt for Ibero Data
-# https://ibero-data.github.io
+# https://iberodata.es
 
 # Allow all bots
 User-agent: *
 Allow: /
 
 # Sitemap location
-Sitemap: https://ibero-data.github.io/sitemap-index.xml
+Sitemap: https://iberodata.es/sitemap-index.xml
 
 # Crawl delay (in seconds) - be respectful to search engines
 Crawl-delay: 1

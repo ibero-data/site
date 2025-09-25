@@ -34,6 +34,6 @@ export default defineConfig({
 		}
 	},
 	output: 'static',
-	site: 'https://ibero-data.github.io',
+	site: 'https://iberodata.es',
 	base: '/'
 });
