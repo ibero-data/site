@@ -1,0 +1,67 @@
+/* Enhanced Gradient Text Effects */
+.gradient-text-vibrant {
+  background: linear-gradient(
+    135deg,
+    #FF0040 0%,
+    #FF6B35 25%,
+    #FFD700 50%,
+    #FF6B35 75%,
+    #FF0040 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  background-size: 200% auto;
+  animation: gradient-shift 3s ease infinite;
+}
+
+.gradient-text-ibero {
+  background: linear-gradient(
+    90deg,
+    #AA151B 0%,
+    #FF6B35 35%,
+    #F1BF00 65%,
+    #FFD700 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 900;
+}
+
+.gradient-text-fire {
+  background: linear-gradient(
+    45deg,
+    #FF0040,
+    #FF6B35,
+    #FFA500,
+    #FFD700
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: brightness(1.2) contrast(1.1);
+}
+
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Ensure gradients are always visible */
+.bg-clip-text {
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+}
+
+.text-transparent {
+  -webkit-text-fill-color: transparent !important;
+  color: transparent !important;
+}

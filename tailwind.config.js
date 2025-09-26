@@ -6,6 +6,9 @@ export default {
       colors: {
         'ibero-red': '#AA151B',
         'ibero-yellow': '#F1BF00',
+        'ibero-orange': '#FF6B35',
+        'ibero-bright-red': '#FF0040',
+        'ibero-bright-yellow': '#FFD700',
       },
       animation: {
         'float': 'float 6s ease-in-out infinite',
