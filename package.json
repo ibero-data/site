@@ -4,9 +4,13 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "bun run generate:seo && astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "generate:sitemap": "bun scripts/generate-sitemap.js",
+    "generate:rss": "bun scripts/generate-rss.js",
+    "generate:images": "bun scripts/generate-images.js",
+    "generate:seo": "bun run generate:images && bun run generate:sitemap && bun run generate:rss"
   },
   "dependencies": {
     "@astrojs/mdx": "^4.3.6",
@@ -28,5 +32,8 @@
     "resend": "^6.1.0",
     "tailwind-merge": "^3.3.1",
     "tailwindcss": "^4.1.13"
+  },
+  "devDependencies": {
+    "sharp": "^0.34.4"
   }
 }

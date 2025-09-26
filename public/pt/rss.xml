@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0"
+     xmlns:dc="http://purl.org/dc/elements/1.1/"
+     xmlns:content="http://purl.org/rss/1.0/modules/content/"
+     xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Ibero Data - Soluções de Engenharia de Dados</title>
+    <description>Últimas atualizações da Ibero Data - Engenharia de Dados Open-Source e Conectores Personalizados</description>
+    <link>https://iberodata.es/pt</link>
+    <language>pt</language>
+    <lastBuildDate>Fri, 26 Sep 2025 07:33:17 GMT</lastBuildDate>
+    <pubDate>Fri, 26 Sep 2025 07:33:17 GMT</pubDate>
+    <ttl>60</ttl>
+    <atom:link href="https://iberodata.es/pt/rss.xml" rel="self" type="application/rss+xml"/>
+
+    <item>
+      <title>Bem-vindo ao Ibero Data</title>
+      <description>Últimas atualizações da Ibero Data - Engenharia de Dados Open-Source e Conectores Personalizados</description>
+      <link>https://iberodata.es/pt</link>
+      <guid isPermaLink="true">https://iberodata.es/pt</guid>
+      <pubDate>Fri, 26 Sep 2025 07:33:17 GMT</pubDate>
+      <dc:creator>Ibero Data Team</dc:creator>
+    </item>
+  </channel>
+</rss>

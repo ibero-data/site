@@ -1,0 +1,6 @@
+# Security Policy for iberodata.es
+
+Contact: security@iberodata.es
+Expires: 2026-12-31T23:59:59.000Z
+Preferred-Languages: en, es, pt, it
+Canonical: https://iberodata.es/.well-known/security.txt

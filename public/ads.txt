@@ -1,0 +1,5 @@
+# Ads.txt for iberodata.es
+# Placeholder for authorized digital sellers
+# Add your advertising partners here when needed
+# Example format:
+# google.com, pub-0000000000000000, DIRECT, f08c47fec0942fa0

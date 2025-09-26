@@ -1,20 +1,236 @@
 # Robots.txt for Ibero Data
 # https://iberodata.es
+# Last Updated: 2025-09-26
 
-# Allow all bots
+# ============================================
+# GLOBAL RULES - ALL SEARCH ENGINES
+# ============================================
 User-agent: *
 Allow: /
-
-# Sitemap location
-Sitemap: https://iberodata.es/sitemap-index.xml
-
-# Crawl delay (in seconds) - be respectful to search engines
 Crawl-delay: 1
 
-# Disallow access to API endpoints
+# Disallow sensitive areas
 Disallow: /api/
+Disallow: /admin/
+Disallow: /_astro/
+Disallow: /node_modules/
+Disallow: /.git/
+Disallow: /scripts/
+Disallow: /src/
+Disallow: /*.json$
+Disallow: /*.config.js$
+Disallow: /*.config.mjs$
 
-# Google specific
+# ============================================
+# GOOGLE (GOOGLEBOT)
+# ============================================
 User-agent: Googlebot
 Allow: /
 Crawl-delay: 0
+
+User-agent: Googlebot-Image
+Allow: /
+Allow: /*.jpg$
+Allow: /*.jpeg$
+Allow: /*.png$
+Allow: /*.webp$
+Allow: /*.svg$
+
+User-agent: Googlebot-Video
+Allow: /
+
+User-agent: Googlebot-News
+Allow: /
+
+User-agent: AdsBot-Google
+Allow: /
+
+# ============================================
+# MICROSOFT BING
+# ============================================
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 0
+
+User-agent: BingPreview
+Allow: /
+
+User-agent: msnbot
+Allow: /
+Crawl-delay: 1
+
+User-agent: msnbot-media
+Allow: /
+
+# ============================================
+# YANDEX (Russian Search Engine)
+# ============================================
+User-agent: Yandex
+Allow: /
+Crawl-delay: 2
+Clean-param: utm_source&utm_medium&utm_campaign
+
+User-agent: YandexBot
+Allow: /
+Crawl-delay: 2
+
+User-agent: YandexImages
+Allow: /
+
+# ============================================
+# BAIDU (Chinese Search Engine)
+# ============================================
+User-agent: Baiduspider
+Allow: /
+Crawl-delay: 2
+
+User-agent: Baiduspider-image
+Allow: /
+
+User-agent: Baiduspider-video
+Allow: /
+
+# ============================================
+# DUCKDUCKGO
+# ============================================
+User-agent: DuckDuckBot
+Allow: /
+Crawl-delay: 1
+
+# ============================================
+# APPLE (SIRI & SPOTLIGHT)
+# ============================================
+User-agent: Applebot
+Allow: /
+Crawl-delay: 1
+
+User-agent: AppleNewsBot
+Allow: /
+
+# ============================================
+# FACEBOOK & META
+# ============================================
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: FacebookBot
+Allow: /
+
+User-agent: WhatsApp
+Allow: /
+
+User-agent: facebookcatalog
+Allow: /
+
+# ============================================
+# TWITTER / X
+# ============================================
+User-agent: Twitterbot
+Allow: /
+
+# ============================================
+# LINKEDIN
+# ============================================
+User-agent: LinkedInBot
+Allow: /
+
+# ============================================
+# PINTEREST
+# ============================================
+User-agent: Pinterestbot
+Allow: /
+
+# ============================================
+# TELEGRAM
+# ============================================
+User-agent: TelegramBot
+Allow: /
+
+# ============================================
+# SLACK
+# ============================================
+User-agent: Slackbot
+Allow: /
+
+User-agent: Slack-ImgProxy
+Allow: /
+
+# ============================================
+# DISCORD
+# ============================================
+User-agent: Discordbot
+Allow: /
+
+# ============================================
+# SEMRUSH (SEO Tool)
+# ============================================
+User-agent: SemrushBot
+Allow: /
+Crawl-delay: 3
+
+User-agent: SemrushBot-SA
+Allow: /
+Crawl-delay: 3
+
+# ============================================
+# AHREFS (SEO Tool)
+# ============================================
+User-agent: AhrefsBot
+Allow: /
+Crawl-delay: 3
+
+# ============================================
+# MOZ (SEO Tool)
+# ============================================
+User-agent: rogerbot
+Allow: /
+Crawl-delay: 3
+
+User-agent: dotbot
+Allow: /
+Crawl-delay: 3
+
+# ============================================
+# MAJESTIC (SEO Tool)
+# ============================================
+User-agent: MJ12bot
+Allow: /
+Crawl-delay: 3
+
+# ============================================
+# OPENSEA & WEB3 CRAWLERS
+# ============================================
+User-agent: OpenSeaBot
+Allow: /
+
+# ============================================
+# ARCHIVE.ORG
+# ============================================
+User-agent: ia_archiver
+Allow: /
+Crawl-delay: 5
+
+# ============================================
+# GPT & AI CRAWLERS
+# ============================================
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+# ============================================
+# SITEMAP LOCATIONS
+# ============================================
+Sitemap: https://iberodata.es/sitemap.xml
+Sitemap: https://iberodata.es/sitemap-index.xml
+Sitemap: https://iberodata.es/sitemap-0.xml

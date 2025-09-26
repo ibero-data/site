@@ -3,6 +3,7 @@
   "short_name": "Ibero Data",
   "description": "Specializing in Open-Source Data Engineering and Custom Connectors Services in Europe, big data, data pipelines, ETL, ELT, and more.",
   "start_url": "/",
+  "scope": "/",
   "display": "standalone",
   "background_color": "#0a0a0a",
   "theme_color": "#AA151B",
@@ -17,15 +18,78 @@
     {
       "src": "/logo.png",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any"
     },
     {
       "src": "/logo.png",
       "sizes": "384x384",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/logo.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/logo.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/logo.png",
+      "sizes": "72x72",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/logo.png",
+      "sizes": "48x48",
+      "type": "image/png",
+      "purpose": "any"
     }
   ],
-  "categories": ["business", "productivity", "utilities"],
+  "categories": ["business", "productivity", "utilities", "developer"],
   "lang": "en",
-  "dir": "ltr"
+  "dir": "ltr",
+  "prefer_related_applications": false,
+  "screenshots": [
+    {
+      "src": "/screenshot-desktop.png",
+      "sizes": "1920x1080",
+      "type": "image/png",
+      "form_factor": "wide"
+    },
+    {
+      "src": "/screenshot-mobile.png",
+      "sizes": "390x844",
+      "type": "image/png",
+      "form_factor": "narrow"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Services",
+      "url": "/#services",
+      "description": "Our data engineering services",
+      "icons": [{"src": "/logo.png", "sizes": "96x96"}]
+    },
+    {
+      "name": "About Us",
+      "url": "/#about",
+      "description": "Learn about Ibero Data",
+      "icons": [{"src": "/logo.png", "sizes": "96x96"}]
+    },
+    {
+      "name": "Contact",
+      "url": "/#contact",
+      "description": "Get in touch with us",
+      "icons": [{"src": "/logo.png", "sizes": "96x96"}]
+    }
+  ],
+  "related_applications": [],
+  "iarc_rating_id": ""
 }
