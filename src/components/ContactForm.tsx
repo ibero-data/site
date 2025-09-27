@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { Send, CheckCircle, AlertCircle } from 'lucide-react';
+import { useState } from "react";
+import { Send, CheckCircle, AlertCircle } from "lucide-react";
 
 interface ContactFormProps {
   translations: any;
@@ -7,11 +7,13 @@ interface ContactFormProps {
 
 export default function ContactForm({ translations }: ContactFormProps) {
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: ''
+    name: "",
+    email: "",
+    message: "",
   });
-  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+  const [status, setStatus] = useState<
+    "idle" | "loading" | "success" | "error"
+  >("idle");
   const [errors, setErrors] = useState<Record<string, string>>({});
 
   const validateForm = () => {
@@ -24,7 +26,7 @@ export default function ContactForm({ translations }: ContactFormProps) {
     if (!formData.email.trim()) {
       newErrors.email = translations.contact.emailRequired;
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = 'Please enter a valid email';
+      newErrors.email = "Please enter a valid email";
     }
 
     if (!formData.message.trim() || formData.message.length < 20) {
@@ -40,34 +42,48 @@ export default function ContactForm({ translations }: ContactFormProps) {
 
     if (!validateForm()) return;
 
-    setStatus('loading');
+    setStatus("loading");
 
     try {
-      // For GitHub Pages, we'll use Formspree or another service
-      // You can sign up at https://formspree.io/ for free
-      const response = await fetch('https://formspree.io/f/YOUR_FORM_ID', {
-        method: 'POST',
+      const response = await fetch("https://formspree.io/f/myznkjpg", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(formData),
       });
 
       if (!response.ok) {
-        throw new Error('Failed to send message');
+        // track error with trk
+        // @ts-ignore
+        if (window.trk) {
+          // @ts-ignore
+          window.trk("formError", {
+            form: "contact",
+            error: response.statusText,
+          });
+        }
+        throw new Error("Failed to send message");
       }
 
-      setStatus('success');
-      setFormData({ name: '', email: '', message: '' });
+      setStatus("success");
+      setFormData({ name: "", email: "", message: "" });
 
       // Reset success message after 5 seconds
-      setTimeout(() => setStatus('idle'), 5000);
+      setTimeout(() => setStatus("idle"), 5000);
+      // @ts-ignore
+      if (window.trk) {
+        // @ts-ignore
+        window.trk("formSent", {
+          form: "contact",
+        });
+      }
     } catch (error) {
-      console.error('Error sending message:', error);
-      setStatus('error');
+      console.error("Error sending message:", error);
+      setStatus("error");
 
       // Reset error message after 5 seconds
-      setTimeout(() => setStatus('idle'), 5000);
+      setTimeout(() => setStatus("idle"), 5000);
     }
   };
 
@@ -75,7 +91,10 @@ export default function ContactForm({ translations }: ContactFormProps) {
     <form onSubmit={handleSubmit} className="space-y-6">
       {/* Name Field */}
       <div>
-        <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+        <label
+          htmlFor="name"
+          className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
+        >
           {translations.contact.name}
         </label>
         <input
@@ -85,7 +104,9 @@ export default function ContactForm({ translations }: ContactFormProps) {
           onChange={(e) => setFormData({ ...formData, name: e.target.value })}
           placeholder={translations.contact.namePlaceholder}
           className={`w-full px-4 py-3 rounded-lg bg-white/80 dark:bg-gray-800/80 backdrop-blur-md border ${
-            errors.name ? 'border-red-500' : 'border-gray-300 dark:border-gray-600'
+            errors.name
+              ? "border-red-500"
+              : "border-gray-300 dark:border-gray-600"
           } focus:outline-none focus:ring-2 focus:ring-ibero-yellow transition-all`}
         />
         {errors.name && (
@@ -95,7 +116,10 @@ export default function ContactForm({ translations }: ContactFormProps) {
 
       {/* Email Field */}
       <div>
-        <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+        <label
+          htmlFor="email"
+          className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
+        >
           {translations.contact.email}
         </label>
         <input
@@ -105,7 +129,9 @@ export default function ContactForm({ translations }: ContactFormProps) {
           onChange={(e) => setFormData({ ...formData, email: e.target.value })}
           placeholder={translations.contact.emailPlaceholder}
           className={`w-full px-4 py-3 rounded-lg bg-white/80 dark:bg-gray-800/80 backdrop-blur-md border ${
-            errors.email ? 'border-red-500' : 'border-gray-300 dark:border-gray-600'
+            errors.email
+              ? "border-red-500"
+              : "border-gray-300 dark:border-gray-600"
           } focus:outline-none focus:ring-2 focus:ring-ibero-yellow transition-all`}
         />
         {errors.email && (
@@ -115,17 +141,24 @@ export default function ContactForm({ translations }: ContactFormProps) {
 
       {/* Message Field */}
       <div>
-        <label htmlFor="message" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+        <label
+          htmlFor="message"
+          className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
+        >
           {translations.contact.message}
         </label>
         <textarea
           id="message"
           rows={5}
           value={formData.message}
-          onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+          onChange={(e) =>
+            setFormData({ ...formData, message: e.target.value })
+          }
           placeholder={translations.contact.messagePlaceholder}
           className={`w-full px-4 py-3 rounded-lg bg-white/80 dark:bg-gray-800/80 backdrop-blur-md border ${
-            errors.message ? 'border-red-500' : 'border-gray-300 dark:border-gray-600'
+            errors.message
+              ? "border-red-500"
+              : "border-gray-300 dark:border-gray-600"
           } focus:outline-none focus:ring-2 focus:ring-ibero-yellow transition-all resize-none`}
         />
         {errors.message && (
@@ -136,14 +169,14 @@ export default function ContactForm({ translations }: ContactFormProps) {
       {/* Submit Button */}
       <button
         type="submit"
-        disabled={status === 'loading'}
+        disabled={status === "loading"}
         className={`w-full px-6 py-3 rounded-lg font-semibold text-white transition-all duration-300 flex items-center justify-center space-x-2 ${
-          status === 'loading'
-            ? 'bg-gray-400 cursor-not-allowed'
-            : 'bg-gradient-to-r from-ibero-red to-ibero-red/80 hover:shadow-2xl hover:scale-105'
+          status === "loading"
+            ? "bg-gray-400 cursor-not-allowed"
+            : "bg-gradient-to-r from-ibero-red to-ibero-red/80 hover:shadow-2xl hover:scale-105"
         }`}
       >
-        {status === 'loading' ? (
+        {status === "loading" ? (
           <>
             <div className="animate-spin rounded-full h-5 w-5 border-2 border-white border-t-transparent"></div>
             <span>{translations.contact.sending}</span>
@@ -157,17 +190,21 @@ export default function ContactForm({ translations }: ContactFormProps) {
       </button>
 
       {/* Status Messages */}
-      {status === 'success' && (
+      {status === "success" && (
         <div className="p-4 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center space-x-2">
           <CheckCircle className="w-5 h-5 text-green-600" />
-          <span className="text-green-700 dark:text-green-400">{translations.contact.success}</span>
+          <span className="text-green-700 dark:text-green-400">
+            {translations.contact.success}
+          </span>
         </div>
       )}
 
-      {status === 'error' && (
+      {status === "error" && (
         <div className="p-4 bg-red-100 dark:bg-red-900/30 rounded-lg flex items-center space-x-2">
           <AlertCircle className="w-5 h-5 text-red-600" />
-          <span className="text-red-700 dark:text-red-400">{translations.contact.error}</span>
+          <span className="text-red-700 dark:text-red-400">
+            {translations.contact.error}
+          </span>
         </div>
       )}
     </form>
