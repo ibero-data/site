@@ -1,0 +1,105 @@
+---
+import ProductCard from "./ProductCard";
+import { motion } from "framer-motion";
+---
+
+<section id="products" class="py-24 relative overflow-hidden">
+  <div
+    class="absolute inset-0 bg-gradient-to-b from-transparent via-ibero-red/5 to-transparent"
+  >
+  </div>
+
+  <div class="container mx-auto px-6 relative z-10">
+    <div class="text-center mb-16">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        viewport={{ once: true }}
+        client:load
+      >
+        <h2
+          class="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-ibero-red to-ibero-yellow bg-clip-text text-transparent"
+        >
+          Open Source Products
+        </h2>
+        <p class="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
+          Powerful tools and frameworks built with passion, designed to
+          accelerate your development workflow
+        </p>
+      </motion.div>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+      <ProductCard
+        title="DuckUI"
+        description="A modern, blazing-fast UI component library built on top of DuckDB. Create beautiful data visualizations and analytics dashboards with ease."
+        logoUrl="https://duckui.com/img/logo-padding.png"
+        websiteUrl="https://duckui.com?utm_source=ibero-data&utm_source=products"
+        githubUrl="https://github.com/ibero-data/duck-ui"
+        features={[
+          "DuckDB Integration",
+          "Real-time Analytics",
+          "Beautiful Components",
+          "TypeScript Support",
+          "Responsive Design",
+        ]}
+        techStack={["React", "TypeScript", "DuckDB WASM"]}
+        primaryColor="#FF6B35"
+        secondaryColor="#FFD700"
+        delay={0}
+        client:load
+      />
+
+      <ProductCard
+        title="CH-UI"
+        description="A powerful ClickHouse UI that makes database management intuitive. Execute queries, visualize data, and manage your ClickHouse clusters with a sleek interface."
+        logoUrl="https://ch-ui.com/logo.png"
+        websiteUrl="https://ch-ui.com?utm_source=ibero-data&utm_source=products"
+        githubUrl="https://github.com/caioricciuti/ch-ui"
+        features={[
+          "Query Builder",
+          "Data Visualization",
+          "Cluster Management",
+          "SQL Editor",
+          "Performance Metrics",
+        ]}
+        techStack={["TypeScript", "ClickHouse"]}
+        primaryColor="#AA151B"
+        secondaryColor="#F1BF00"
+        delay={0.2}
+        client:load
+      />
+    </div>
+
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, delay: 0.4 }}
+      viewport={{ once: true }}
+      className="text-center mt-12"
+      client:load
+    >
+      <p class="text-gray-600 dark:text-gray-400 text-lg">
+        More exciting products coming soon...
+      </p>
+    </motion.div>
+  </div>
+
+  <div
+    class="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-ibero-red/30 to-transparent"
+  >
+  </div>
+</section>
+
+<style>
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+</style>
