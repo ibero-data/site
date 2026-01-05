@@ -1,6 +1,6 @@
 export function getLangFromUrl(url: URL) {
   const [, lang] = url.pathname.split('/');
-  if (lang && ['en', 'es', 'pt', 'it'].includes(lang)) return lang as string;
+  if (lang && ['en', 'es'].includes(lang)) return lang as string;
   return 'en';
 }
 
@@ -17,8 +17,6 @@ interface Translations {
 const translations: { [key: string]: Translations } = {
   en: await import('../../locales/en.json'),
   es: await import('../../locales/es.json'),
-  pt: await import('../../locales/pt.json'),
-  it: await import('../../locales/it.json'),
 };
 
 export function getTranslations(lang: string) {

@@ -4,7 +4,7 @@ import { fileURLToPath } from 'url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const DOMAIN = 'https://iberodata.es';
-const LOCALES = ['en', 'es', 'pt', 'it'];
+const LOCALES = ['en', 'es'];
 
 function generateRSSFeed(locale = 'en') {
   const langPath = locale === 'en' ? '' : `/${locale}`;
@@ -20,9 +20,7 @@ function generateRSSFeed(locale = 'en') {
 
   const langDescriptions = {
     en: 'Latest updates from Ibero Data - Open-Source Data Engineering and Custom Connectors',
-    es: 'Últimas actualizaciones de Ibero Data - Ingeniería de Datos Open-Source y Conectores Personalizados',
-    pt: 'Últimas atualizações da Ibero Data - Engenharia de Dados Open-Source e Conectores Personalizados',
-    it: 'Ultimi aggiornamenti da Ibero Data - Ingegneria dei Dati Open-Source e Connettori Personalizzati'
+    es: 'Últimas actualizaciones de Ibero Data - Ingeniería de Datos Open-Source y Conectores Personalizados'
   };
 
   const rss = `<?xml version="1.0" encoding="UTF-8"?>

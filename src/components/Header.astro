@@ -6,30 +6,32 @@ const lang = getLangFromUrl(Astro.url);
 const t = getTranslations(lang);
 ---
 
-<header class="fixed w-full top-0 z-50 bg-gray-950/80 backdrop-blur-xl border-b border-white/10">
+<header class="fixed w-full top-0 z-50 bg-background/90 backdrop-blur-xl border-b border-border">
   <nav class="container mx-auto px-6 py-4">
     <div class="flex items-center justify-between">
       <!-- Logo -->
       <a href={`/${lang === 'en' ? '' : lang}`} class="flex items-center space-x-3">
         <img src="/logo.png" alt="Ibero Data" class="h-10 w-auto" />
-        <span class="text-xl font-bold">
-          <span class="text-white">Ibero</span>
-          <span class="gradient-text-ibero ml-1">Data</span>
+        <span class="text-xl font-bold text-foreground">
+          Ibero Data
         </span>
       </a>
 
       <!-- Desktop Navigation -->
       <div class="hidden md:flex items-center space-x-8">
-        <a href={`#home`} class="text-gray-300 hover:text-ibero-yellow transition-colors font-medium">
+        <a href={`#home`} class="text-muted-foreground hover:text-primary transition-colors font-medium">
           {t.header.home}
         </a>
-        <a href={`#services`} class="text-gray-300 hover:text-ibero-yellow transition-colors font-medium">
+        <a href={`#services`} class="text-muted-foreground hover:text-primary transition-colors font-medium">
           {t.header.services}
         </a>
-        <a href={`#about`} class="text-gray-300 hover:text-ibero-yellow transition-colors font-medium">
+        <a href={`#products`} class="text-muted-foreground hover:text-primary transition-colors font-medium">
+          {t.header.products}
+        </a>
+        <a href={`#about`} class="text-muted-foreground hover:text-primary transition-colors font-medium">
           {t.header.about}
         </a>
-        <a href={`#contact`} class="text-gray-300 hover:text-ibero-yellow transition-colors font-medium">
+        <a href={`#contact`} class="text-muted-foreground hover:text-primary transition-colors font-medium">
           {t.header.contact}
         </a>
         <LanguageSwitcher client:load currentLang={lang} />
@@ -38,30 +40,33 @@ const t = getTranslations(lang);
       <!-- Mobile Menu Button -->
       <button
         id="mobile-menu-button"
-        class="md:hidden p-2 rounded-lg hover:bg-gray-800 transition-colors"
+        class="md:hidden p-2 rounded-lg hover:bg-muted transition-colors"
         aria-label="Toggle mobile menu"
         aria-expanded="false"
         aria-controls="mobile-menu"
       >
-        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg class="w-6 h-6 text-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
         </svg>
       </button>
     </div>
 
     <!-- Mobile Menu -->
-    <div id="mobile-menu" class="hidden md:hidden mt-4 pb-4 border-t border-white/10">
+    <div id="mobile-menu" class="hidden md:hidden mt-4 pb-4 border-t border-border">
       <div class="flex flex-col space-y-4 mt-4">
-        <a href={`#home`} class="text-gray-300 hover:text-ibero-yellow transition-colors font-medium">
+        <a href={`#home`} class="text-muted-foreground hover:text-primary transition-colors font-medium">
           {t.header.home}
         </a>
-        <a href={`#services`} class="text-gray-300 hover:text-ibero-yellow transition-colors font-medium">
+        <a href={`#services`} class="text-muted-foreground hover:text-primary transition-colors font-medium">
           {t.header.services}
         </a>
-        <a href={`#about`} class="text-gray-300 hover:text-ibero-yellow transition-colors font-medium">
+        <a href={`#products`} class="text-muted-foreground hover:text-primary transition-colors font-medium">
+          {t.header.products}
+        </a>
+        <a href={`#about`} class="text-muted-foreground hover:text-primary transition-colors font-medium">
           {t.header.about}
         </a>
-        <a href={`#contact`} class="text-gray-300 hover:text-ibero-yellow transition-colors font-medium">
+        <a href={`#contact`} class="text-muted-foreground hover:text-primary transition-colors font-medium">
           {t.header.contact}
         </a>
         <div class="pt-2">

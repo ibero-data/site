@@ -1,58 +1,83 @@
-/* Enhanced Gradient Text Effects */
+/* Professional Gradient Text Effects */
+
+/* Primary gradient - Navy to lighter navy */
+.gradient-text-primary {
+  background: linear-gradient(
+    135deg,
+    #1e3a5f 0%,
+    #2d5a87 50%,
+    #3d7ab0 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Accent gradient - Orange tones */
+.gradient-text-accent {
+  background: linear-gradient(
+    135deg,
+    #e85d04 0%,
+    #f48c06 50%,
+    #faa307 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 700;
+}
+
+/* Professional gradient - Navy to Orange (for key headlines) */
+.gradient-text-pro {
+  background: linear-gradient(
+    90deg,
+    #1e3a5f 0%,
+    #2d5a87 40%,
+    #e85d04 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 700;
+}
+
+/* Legacy gradient classes - kept for compatibility but updated colors */
+.gradient-text-ibero {
+  background: linear-gradient(
+    90deg,
+    #e85d04 0%,
+    #f48c06 50%,
+    #faa307 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 700;
+}
+
+.gradient-text-fire {
+  background: linear-gradient(
+    135deg,
+    #e85d04 0%,
+    #f48c06 50%,
+    #faa307 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
 .gradient-text-vibrant {
   background: linear-gradient(
     135deg,
-    #FF0040 0%,
-    #FF6B35 25%,
-    #FFD700 50%,
-    #FF6B35 75%,
-    #FF0040 100%
+    #1e3a5f 0%,
+    #e85d04 50%,
+    #f48c06 100%
   );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   background-size: 200% auto;
-  animation: gradient-shift 3s ease infinite;
-}
-
-.gradient-text-ibero {
-  background: linear-gradient(
-    90deg,
-    #AA151B 0%,
-    #FF6B35 35%,
-    #F1BF00 65%,
-    #FFD700 100%
-  );
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  font-weight: 900;
-}
-
-.gradient-text-fire {
-  background: linear-gradient(
-    45deg,
-    #FF0040,
-    #FF6B35,
-    #FFA500,
-    #FFD700
-  );
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  filter: brightness(1.2) contrast(1.1);
-}
-
-@keyframes gradient-shift {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
 }
 
 /* Ensure gradients are always visible */

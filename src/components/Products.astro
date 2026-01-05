@@ -1,105 +1,142 @@
 ---
-import ProductCard from "./ProductCard";
-import { motion } from "framer-motion";
+import { Star, ExternalLink, Github, Bell } from "lucide-react";
+import { getLangFromUrl, getTranslations } from "../lib/i18n";
+
+const lang = getLangFromUrl(Astro.url);
+const t = getTranslations(lang);
+
+const products = [
+  {
+    name: "CH-UI",
+    description: t.products.chuiDescription,
+    githubUrl: "https://github.com/caioricciuti/ch-ui",
+    websiteUrl: "https://ch-ui.com",
+    stars: "500+",
+    status: "released",
+    hasOpenSource: true,
+  },
+  {
+    name: "DuckUI",
+    description: t.products.duckuiDescription,
+    githubUrl: "https://github.com/ibero-data/duck-ui",
+    websiteUrl: "https://duckui.com",
+    stars: "500+",
+    status: "released",
+    hasOpenSource: true,
+  },
+  {
+    name: "YAAT",
+    description: t.products.yaatDescription,
+    websiteUrl: "https://yaat.io",
+    status: "released",
+    hasOpenSource: false,
+  },
+];
+
+// Upcoming products - only renders if array has items
+const upcomingProducts: {
+  name: string;
+  description: string;
+  releaseDate: string;
+}[] = [];
 ---
 
-<section id="products" class="py-24 relative overflow-hidden">
-  <div
-    class="absolute inset-0 bg-gradient-to-b from-transparent via-ibero-red/5 to-transparent"
-  >
-  </div>
-
+<section id="products" class="py-24 md:py-32 bg-background">
   <div class="container mx-auto px-6 relative z-10">
+    <!-- Section Header -->
     <div class="text-center mb-16">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        viewport={{ once: true }}
-        client:load
-      >
-        <h2
-          class="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-ibero-red to-ibero-yellow bg-clip-text text-transparent"
-        >
-          Open Source Products
-        </h2>
-        <p class="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
-          Powerful tools and frameworks built with passion, designed to
-          accelerate your development workflow
-        </p>
-      </motion.div>
-    </div>
-
-    <div class="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
-      <ProductCard
-        title="DuckUI"
-        description="A modern, blazing-fast UI component library built on top of DuckDB. Create beautiful data visualizations and analytics dashboards with ease."
-        logoUrl="https://duckui.com/img/logo-padding.png"
-        websiteUrl="https://duckui.com?utm_source=ibero-data&utm_source=products"
-        githubUrl="https://github.com/ibero-data/duck-ui"
-        features={[
-          "DuckDB Integration",
-          "Real-time Analytics",
-          "Beautiful Components",
-          "TypeScript Support",
-          "Responsive Design",
-        ]}
-        techStack={["React", "TypeScript", "DuckDB WASM"]}
-        primaryColor="#FF6B35"
-        secondaryColor="#FFD700"
-        delay={0}
-        client:load
-      />
-
-      <ProductCard
-        title="CH-UI"
-        description="A powerful ClickHouse UI that makes database management intuitive. Execute queries, visualize data, and manage your ClickHouse clusters with a sleek interface."
-        logoUrl="https://ch-ui.com/logo.png"
-        websiteUrl="https://ch-ui.com?utm_source=ibero-data&utm_source=products"
-        githubUrl="https://github.com/caioricciuti/ch-ui"
-        features={[
-          "Query Builder",
-          "Data Visualization",
-          "Cluster Management",
-          "SQL Editor",
-          "Performance Metrics",
-        ]}
-        techStack={["TypeScript", "ClickHouse"]}
-        primaryColor="#AA151B"
-        secondaryColor="#F1BF00"
-        delay={0.2}
-        client:load
-      />
-    </div>
-
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, delay: 0.4 }}
-      viewport={{ once: true }}
-      className="text-center mt-12"
-      client:load
-    >
-      <p class="text-gray-600 dark:text-gray-400 text-lg">
-        More exciting products coming soon...
+      <h2 class="text-4xl md:text-5xl font-bold mb-4 text-foreground">
+        {t.products.title}
+      </h2>
+      <p class="text-lg text-muted-foreground max-w-3xl mx-auto">
+        {t.products.subtitle}
       </p>
-    </motion.div>
-  </div>
+    </div>
 
-  <div
-    class="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-ibero-red/30 to-transparent"
-  >
+    <!-- Products Grid -->
+    <div class="grid md:grid-cols-2 gap-6 md:gap-8 max-w-5xl mx-auto mb-12">
+      {
+        products.map((product) => (
+          <div class="rounded-2xl p-8 transition-all duration-300 bg-card border border-border hover:border-primary/30 hover:shadow-lg">
+            <div class="flex items-start justify-between mb-4">
+              <h3 class="text-2xl font-bold text-card-foreground">
+                {product.name}
+              </h3>
+              {product.hasOpenSource && product.stars && (
+                <div class="flex items-center gap-1.5 text-primary">
+                  <Star className="w-4 h-4 fill-current" />
+                  <span class="font-semibold">{product.stars}</span>
+                  <span class="text-muted-foreground text-sm">
+                    {t.products.githubStars}
+                  </span>
+                </div>
+              )}
+            </div>
+
+            <p class="text-muted-foreground mb-6 leading-relaxed">
+              {product.description}
+            </p>
+
+            <div class="flex items-center gap-3">
+              <a
+                href={product.websiteUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center gap-2 px-4 py-2 bg-primary hover:bg-primary/90 text-primary-foreground rounded-lg text-sm font-medium transition-colors"
+              >
+                <ExternalLink className="w-4 h-4" />
+                {t.products.viewProject}
+              </a>
+              {product.hasOpenSource && product.githubUrl && (
+                <a
+                  href={product.githubUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-flex items-center gap-2 px-4 py-2 bg-muted hover:bg-muted/80 border border-border rounded-lg text-foreground text-sm font-medium transition-colors"
+                >
+                  <Github className="w-4 h-4" />
+                  GitHub
+                </a>
+              )}
+            </div>
+          </div>
+        ))
+      }
+    </div>
+
+    {
+      upcomingProducts.length > 0 && (
+        <div class="mt-12 space-y-6">
+          <h3 class="text-center text-muted-foreground text-sm uppercase tracking-wider">
+            {t.products.comingIn}
+          </h3>
+          {upcomingProducts.map((product) => (
+            <div class="max-w-2xl mx-auto">
+              <div class="p-6 md:p-8 rounded-2xl border-2 border-dashed border-border bg-muted text-center">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-medium mb-4">
+                  <Bell className="w-3.5 h-3.5" />
+                  {product.releaseDate}
+                </div>
+
+                <h3 class="text-2xl font-bold text-foreground mb-2">
+                  {product.name}
+                </h3>
+                <p class="text-muted-foreground mb-6 max-w-md mx-auto">
+                  {product.description}
+                </p>
+
+                <a
+                  href="#contact"
+                  class="inline-flex items-center gap-2 px-5 py-2.5 bg-primary/10 hover:bg-primary/20 border border-primary/30 rounded-lg text-primary font-medium transition-colors"
+                >
+                  {t.products.joinWaitlist}
+                  <span>→</span>
+                </a>
+              </div>
+            </div>
+          ))}
+        </div>
+      )
+    }
   </div>
 </section>
-
-<style>
-  @keyframes float {
-    0%,
-    100% {
-      transform: translateY(0px);
-    }
-    50% {
-      transform: translateY(-10px);
-    }
-  }
-</style>

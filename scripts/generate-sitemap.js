@@ -4,7 +4,7 @@ import { fileURLToPath } from 'url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const DOMAIN = 'https://iberodata.es';
-const LOCALES = ['en', 'es', 'pt', 'it'];
+const LOCALES = ['en', 'es'];
 
 const STATIC_PAGES = [
   { loc: '', priority: 1.0, changefreq: 'daily' },

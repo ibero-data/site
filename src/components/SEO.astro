@@ -23,7 +23,7 @@ const currentUrl = Astro.url.toString();
 const canonicalURL = canonical || currentUrl;
 
 // Language alternatives for hreflang
-const languages = ['en', 'es', 'pt', 'it'];
+const languages = ['en', 'es'];
 const baseUrl = 'https://iberodata.es';
 
 // Structured Data - Organization
@@ -35,9 +35,9 @@ const organizationSchema = {
   "logo": `${baseUrl}/logo.png`,
   "contactPoint": {
     "@type": "ContactPoint",
-    "email": "info@iberodata.com",
+    "email": "info@iberodata.es",
     "contactType": "customer service",
-    "availableLanguage": ["en", "es", "pt", "it"]
+    "availableLanguage": ["en", "es"]
   },
   "sameAs": [
     "https://github.com/ibero-data",

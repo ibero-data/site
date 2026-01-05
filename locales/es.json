@@ -2,69 +2,98 @@
   "header": {
     "home": "Inicio",
     "services": "Servicios",
+    "products": "Proyectos",
     "about": "Nosotros",
     "contact": "Contacto",
-    "mobileMenuDescription": "Ibero Data - Potenciando Soluciones Basadas en Datos"
+    "mobileMenuDescription": "Ibero Data - Consultoría Profesional de Datos"
   },
   "hero": {
-    "title": "Potenciando Soluciones Basadas en Datos",
-    "subtitle": "Especializados en Ingeniería de Datos Open-Source y Conectores Personalizados"
+    "headline": "Ayudamos empresas a convertir datos en decisiones.",
+    "subheadline": "Ingeniería de datos, analítica y soluciones personalizadas para empresas que toman sus datos en serio.",
+    "trustedBy": "Empresas de todo el mundo confían en nosotros",
+    "yearsExperience": "Años de Experiencia",
+    "pipelinesBuilt": "Pipelines de Datos",
+    "githubStars": "Estrellas en GitHub"
   },
   "cta": {
-    "getInTouch": "Contáctanos"
+    "getInTouch": "Contáctanos",
+    "viewWork": "Ver Proyectos"
   },
   "services": {
-    "title": "Nuestros Servicios",
+    "title": "Cómo Ayudamos",
+    "subtitle": "Soluciones de datos integrales adaptadas a las necesidades de tu negocio",
     "dataEngineering": "Ingeniería de Datos",
-    "dataEngineeringDesc": "Diseñamos e implementamos pipelines y arquitecturas de datos robustos.",
-    "customConnectors": "Conectores de Datos Personalizados",
-    "customConnectorsDesc": "Desarrollamos conectores a medida para fuentes y destinos de datos únicos.",
-    "dataManagement": "Gestión de Datos",
-    "dataManagementDesc": "Optimizamos tus flujos de trabajo de datos y aseguramos integración perfecta.",
+    "dataEngineeringDesc": "Diseñamos y construimos la infraestructura que impulsa tus operaciones de datos.",
+    "dataEngineeringFeatures": ["Pipelines de datos", "Sistemas ETL/ELT", "Arquitectura cloud", "Data warehousing"],
+    "analytics": "Analítica y Dashboards",
+    "analyticsDesc": "Obtén insights claros de tus datos con dashboards que tu equipo realmente usará.",
+    "analyticsFeatures": ["Business intelligence", "Analítica en tiempo real", "Seguimiento de KPIs", "Informes personalizados"],
+    "customDevelopment": "Desarrollo Personalizado",
+    "customDevelopmentDesc": "Herramientas e integraciones a medida que resuelven los problemas únicos de tu negocio.",
+    "customDevelopmentFeatures": ["Aplicaciones web", "APIs e integraciones", "Conectores de datos", "Automatización"],
+    "training": "Formación y Talleres",
+    "trainingDesc": "Capacita a tu equipo con las habilidades para gestionar y aprovechar tus datos eficazmente.",
     "openSource": "Orientación Open-Source",
-    "openSourceDesc": "Asesoramiento experto en tecnologías, herramientas y plataformas de código abierto.",
-    "dataAnalysis": "Análisis de Datos",
-    "dataAnalysisDesc": "Extraemos insights accionables de tus datos, impulsando decisiones informadas.",
-    "consulting": "Consultoría",
-    "consultingDesc": "Asesoramiento estratégico para navegar el complejo panorama de datos.",
-    "training": "Capacitación",
-    "trainingDesc": "Empoderamos a tu equipo con las habilidades para gestionar tus datos eficazmente.",
-    "development": "Desarrollo",
-    "developmentDesc": "Desarrollo de software personalizado para cumplir tus requisitos específicos."
+    "openSourceDesc": "Asesoramiento experto en tecnologías de código abierto para tu stack de datos.",
+    "support": "Soporte Continuo",
+    "supportDesc": "Soporte y consultoría fiable para mantener tus sistemas de datos funcionando sin problemas.",
+    "learnMore": "Saber más",
+    "additionalServices": "Servicios Adicionales",
+    "ctaTitle": "¿Listo para empezar?",
+    "ctaDescription": "Hablemos de cómo podemos ayudarte a alcanzar tus objetivos de datos.",
+    "ctaButton": "Iniciar Proyecto"
+  },
+  "products": {
+    "title": "Construido por Nosotros, Usado por el Mundo",
+    "subtitle": "Construimos y mantenemos herramientas utilizadas por desarrolladores y empresas en todo el mundo. Esta experiencia informa todo lo que construimos para nuestros clientes.",
+    "chuiDescription": "La interfaz moderna para la gestión de bases de datos ClickHouse. Ejecuta consultas, visualiza datos y gestiona instancia con facilidad.",
+    "duckuiDescription": "Quieres consultar tus bases de datos DuckDB en tu propio navegador? ¿Necesitas que tus datos sean 100% privados y seguros? DuckUI es la solución para ti.",
+    "yaatDescription": "Analítica basada en SQL para equipos que quieren control sobre sus datos. Simple, potente y diseñada para la colaboración.",
+    "viewProject": "Ver Proyecto",
+    "comingIn": "Próximamente",
+    "joinWaitlist": "Unirse a Lista de Espera"
   },
   "about": {
-    "title": "Dale sentido a tus Datos...",
-    "description": "En Ibero-Data sabemos que los datos son el alma de tu negocio. Nuestra misión es ayudarte a aprovechar el poder de los datos para impulsar el crecimiento y la innovación. Sabemos cómo hacer ingeniería de datos y conectores personalizados, proporcionando soluciones escalables y rentables adaptadas a tus necesidades únicas. Desde consultoría estratégica hasta capacitación práctica. Te respaldamos."
-  },
-  "reasons": {
-    "costEfficiency": "Eficiencia",
-    "costEfficiencyDesc": "Optimiza tus soluciones de datos sin romper tu presupuesto.",
-    "scalability": "Escalabilidad",
-    "scalabilityDesc": "Soluciones que crecen con las necesidades de tu negocio.",
-    "simple": "Hazlo simple",
-    "simpleDesc": "Optimiza tus flujos de trabajo para máxima eficiencia, con soluciones simples y efectivas.",
-    "customizedSolutions": "Soluciones Personalizadas",
-    "customizedSolutionsDesc": "Enfoques adaptados para enfrentar tus desafíos únicos"
+    "title": "Sobre Ibero Data",
+    "description": "Somos una consultoría profesional de datos que presta servicios a empresas en la Península Ibérica e Italia. Nuestra misión es ayudar a empresas establecidas a dar sentido a sus datos y convertirlos en insights accionables.",
+    "description2": "Con más de 8 años de experiencia en ingeniería de datos y un profundo compromiso con las tecnologías open-source, aportamos experiencia de nivel empresarial sin la complejidad empresarial.",
+    "location": "Sede en Alicante, España",
+    "technologiesTitle": "Tecnologías con las que Trabajamos",
+    "valuesTitle": "Nuestro Enfoque",
+    "valueEfficiency": "Eficiencia Primero",
+    "valueEfficiencyDesc": "Optimizamos para resultado sin complejidad. Las soluciones simples que funcionan son mejores que las overengineered que falland a cada dos pro tres.",
+    "valueReliability": "La Fiabilidad Importa",
+    "valueReliabilityDesc": "Tu infraestructura de datos debe ser algo en lo que puedas confiar. Construimos sistemas robustos y mantenibles.",
+    "valuePartnership": "Verdaderos Socios",
+    "valuePartnershipDesc": "No somos solo proveedores, queremos ser socios comprometidos con tu éxito. Te diremos lo que necesitas escuchar, no solo lo que quieres escuchar."
   },
   "contact": {
-    "title": "Ponte en Contacto",
-    "description": "¿Listo para dar el siguiente paso? Escríbenos y discutamos cómo podemos ayudarte a alcanzar tus objetivos de datos.",
+    "title": "Hablemos de tus Datos",
+    "description": "¿Hablamos? Contáctanos y hablemos de cómo podemos ayudarte a hacer tus datos trabajaren para ti.",
+    "emailLabel": "Email",
+    "locationLabel": "Ubicación",
+    "servingRegions": "Prestando servicio para todo el mundo",
+    "formTitle": "Envíanos un mensaje",
     "name": "Tu Nombre",
-    "namePlaceholder": "Juan Pérez",
+    "namePlaceholder": "Juan García",
     "nameRequired": "El nombre es requerido",
-    "email": "Tu Correo",
-    "emailPlaceholder": "yo@ejemplo.com",
-    "emailRequired": "El correo es requerido",
+    "email": "Tu Email",
+    "emailPlaceholder": "juan@empresa.com",
+    "emailRequired": "El email es requerido",
+    "company": "Empresa",
+    "companyPlaceholder": "Tu Empresa",
     "message": "Tu Mensaje",
-    "messagePlaceholder": "¿Cómo podemos ayudarte?",
-    "messageMinLength": "El mensaje es requerido, mínimo 20 caracteres",
+    "messagePlaceholder": "Cuéntanos sobre tu proyecto o desafíos... (Min 20 caracteres)",
+    "messageMinLength": "El mensaje es requerido (mínimo 20 caracteres)",
     "submit": "Enviar Mensaje",
-    "sending": "Enviando Mensaje",
+    "sending": "Enviando...",
     "success": "¡Mensaje enviado exitosamente!",
-    "error": "Lo sentimos, algo salió mal",
-    "retry": "Intenta de nuevo"
+    "error": "Lo sentimos, algo salió mal, puedes enviar un correo a info@iberodata.es",
+    "retry": "Intentar de nuevo"
   },
   "footer": {
-    "allRightsReserved": "Todos los derechos reservados."
+    "allRightsReserved": "Todos los derechos reservados.",
+    "quickLinks": "Enlaces Rápidos",
+    "followUs": "Síguenos"
   }
 }

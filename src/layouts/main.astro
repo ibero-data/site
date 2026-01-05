@@ -26,7 +26,9 @@ const lang = getLangFromUrl(Astro.url);
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="generator" content={Astro.generator} />
-    <script src="https://yaat.io/s/yaat.js"defer></script>
+    <script src="https://yaat.io/s/yaat.js" defer></script>
+
+
 
     <!-- Favicon and Icons -->
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
@@ -52,7 +54,7 @@ const lang = getLangFromUrl(Astro.url);
 
     <slot name="head" />
   </head>
-  <body class="bg-gray-950 text-white min-h-screen">
+  <body class="bg-background text-foreground min-h-screen overflow-x-hidden">
     <Header />
     <main>
       <slot />
@@ -60,3 +62,5 @@ const lang = getLangFromUrl(Astro.url);
     <Footer />
   </body>
 </html>
+
+

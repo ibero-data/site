@@ -1,69 +1,97 @@
 ---
-import { TrendingUp, Zap, Layers, Target } from "lucide-react";
+import { MapPin, Zap, Shield, Users } from "lucide-react";
 import { getLangFromUrl, getTranslations } from "../lib/i18n";
 
 const lang = getLangFromUrl(Astro.url);
 const t = getTranslations(lang);
 
-const reasons = [
+const values = [
   {
     icon: Zap,
-    title: t.reasons.costEfficiency,
-    description: t.reasons.costEfficiencyDesc,
+    title: t.about.valueEfficiency,
+    description: t.about.valueEfficiencyDesc,
   },
   {
-    icon: TrendingUp,
-    title: t.reasons.scalability,
-    description: t.reasons.scalabilityDesc,
+    icon: Shield,
+    title: t.about.valueReliability,
+    description: t.about.valueReliabilityDesc,
   },
-  { icon: Layers, title: t.reasons.simple, description: t.reasons.simpleDesc },
   {
-    icon: Target,
-    title: t.reasons.customizedSolutions,
-    description: t.reasons.customizedSolutionsDesc,
+    icon: Users,
+    title: t.about.valuePartnership,
+    description: t.about.valuePartnershipDesc,
   },
+];
+
+const technologies = [
+  "Python", "TypeScript", "ClickHouse", "DuckDB",
+  "PostgreSQL", "AWS", "GCP", "dbt", "Airbyte", "And more...",
 ];
 ---
 
-<section id="about" class="py-20 relative overflow-hidden">
-  <!-- Background Pattern -->
-  <div
-    class="absolute inset-0 bg-gradient-to-r from-ibero-yellow/5 to-ibero-red/5 opacity-50"
-  >
-  </div>
-
+<section id="about" class="py-24 md:py-32 bg-muted">
   <div class="container mx-auto px-6 relative z-10">
-    <div class="grid md:grid-cols-2 gap-12 items-center">
-      <!-- Left Content -->
-      <div class="space-y-6">
-        <h2 class="text-4xl md:text-5xl font-bold">
-          <span class="gradient-text-fire">
-            {t.about.title}
-          </span>
-        </h2>
-        <p class="text-lg text-gray-600 dark:text-gray-400 leading-relaxed">
-          {t.about.description}
-        </p>
-      </div>
+    <div class="max-w-6xl mx-auto">
+      <!-- Two column layout -->
+      <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
 
-      <!-- Right Content - Reasons Grid -->
-      <div class="grid grid-cols-2 gap-4">
-        {
-          reasons.map((reason, index) => (
-            <div
-              class="p-6 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 border border-gray-200/20"
-              style={`animation-delay: ${index * 100}ms`}
-            >
-              <reason.icon className="w-10 h-10 text-ibero-red mb-3" />
-              <h3 class="font-bold text-lg mb-2 text-gray-900 dark:text-white">
-                {reason.title}
-              </h3>
-              <p class="text-sm text-gray-600 dark:text-gray-400">
-                {reason.description}
-              </p>
+        <!-- Left: About Content -->
+        <div>
+          <h2 class="text-4xl md:text-5xl font-bold text-foreground mb-6">
+            {t.about.title}
+          </h2>
+
+          <p class="text-lg text-foreground mb-6 leading-relaxed">
+            {t.about.description}
+          </p>
+
+          <p class="text-muted-foreground mb-8 leading-relaxed">
+            {t.about.description2}
+          </p>
+
+          <!-- Location -->
+          <div class="flex items-center gap-3 text-muted-foreground mb-8">
+            <div class="p-2 rounded-lg bg-primary/10 border border-primary/15">
+              <MapPin className="w-5 h-5 text-primary" />
             </div>
-          ))
-        }
+            <span>{t.about.location}</span>
+          </div>
+
+          <!-- Technologies -->
+          <div>
+            <p class="text-sm text-muted-foreground uppercase tracking-wider mb-3">
+              {t.about.technologiesTitle}
+            </p>
+            <div class="flex flex-wrap gap-2">
+              {technologies.map((tech) => (
+                <span class="px-3 py-1.5 text-sm bg-card border border-border rounded-lg text-foreground">
+                  {tech}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Values -->
+        <div class="space-y-6">
+          <h3 class="text-lg font-semibold text-muted-foreground uppercase tracking-wider mb-4">
+            {t.about.valuesTitle}
+          </h3>
+
+          {values.map((value) => (
+            <div class="p-6 rounded-xl bg-card border border-border hover:border-primary/30 transition-colors">
+              <div class="flex items-start gap-4">
+                <div class="inline-flex items-center justify-center p-3 rounded-xl bg-primary/10 border border-primary/15 flex-shrink-0">
+                  <value.icon className="w-5 h-5 text-primary" strokeWidth={1.5} />
+                </div>
+                <div>
+                  <h4 class="font-semibold text-card-foreground mb-1">{value.title}</h4>
+                  <p class="text-sm text-muted-foreground leading-relaxed">{value.description}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   </div>

@@ -1,98 +1,137 @@
 ---
-import GlowingCard from './GlowingCard';
-import { Database, Link, Settings, BookOpen, BarChart3, Users, Lightbulb, Code } from 'lucide-react';
+import { Database, BarChart3, Code, BookOpen, Headphones, Users } from 'lucide-react';
 import { getLangFromUrl, getTranslations } from '../lib/i18n';
 
 const lang = getLangFromUrl(Astro.url);
 const t = getTranslations(lang);
 
-const services = [
-  { icon: Database, title: t.services.dataEngineering, description: t.services.dataEngineeringDesc, color: 'from-red-500 to-orange-500' },
-  { icon: Link, title: t.services.customConnectors, description: t.services.customConnectorsDesc, color: 'from-orange-500 to-yellow-500' },
-  { icon: Settings, title: t.services.dataManagement, description: t.services.dataManagementDesc, color: 'from-yellow-500 to-amber-500' },
-  { icon: BookOpen, title: t.services.openSource, description: t.services.openSourceDesc, color: 'from-amber-500 to-red-500' },
-  { icon: BarChart3, title: t.services.dataAnalysis, description: t.services.dataAnalysisDesc, color: 'from-red-600 to-pink-500' },
-  { icon: Users, title: t.services.consulting, description: t.services.consultingDesc, color: 'from-pink-500 to-purple-500' },
-  { icon: Lightbulb, title: t.services.training, description: t.services.trainingDesc, color: 'from-purple-500 to-indigo-500' },
-  { icon: Code, title: t.services.development, description: t.services.developmentDesc, color: 'from-indigo-500 to-blue-500' },
+// Core services - the main 3
+const coreServices = [
+  {
+    icon: Database,
+    title: t.services.dataEngineering,
+    description: t.services.dataEngineeringDesc,
+    features: t.services.dataEngineeringFeatures,
+  },
+  {
+    icon: BarChart3,
+    title: t.services.analytics,
+    description: t.services.analyticsDesc,
+    features: t.services.analyticsFeatures,
+  },
+  {
+    icon: Code,
+    title: t.services.customDevelopment,
+    description: t.services.customDevelopmentDesc,
+    features: t.services.customDevelopmentFeatures,
+  },
+];
+
+// Secondary services
+const secondaryServices = [
+  {
+    icon: BookOpen,
+    title: t.services.training,
+    description: t.services.trainingDesc,
+  },
+  {
+    icon: Users,
+    title: t.services.openSource,
+    description: t.services.openSourceDesc,
+  },
+  {
+    icon: Headphones,
+    title: t.services.support,
+    description: t.services.supportDesc,
+  },
 ];
 ---
 
-<section id="services" class="relative py-32 overflow-hidden">
-  <!-- Grid Pattern -->
-  <div
-    class="absolute inset-0 opacity-[0.03]"
-    style={{
-      backgroundImage: `linear-gradient(rgba(241, 191, 0, 0.3) 1px, transparent 1px),
-                       linear-gradient(90deg, rgba(241, 191, 0, 0.3) 1px, transparent 1px)`,
-      backgroundSize: '30px 30px'
-    }}
-  />
-
+<section id="services" class="relative py-24 md:py-32 bg-muted">
   <div class="container mx-auto px-6 relative z-10">
     <!-- Section Header -->
-    <div class="text-center mb-20">
-
-      <h2 class="text-5xl md:text-7xl font-black mb-6">
-        <span class="text-white">
-          Our
-        </span>
-        <span class="gradient-text-ibero text-6xl md:text-7xl">
-          Services
-        </span>
+    <div class="text-center mb-16 md:mb-20">
+      <h2 class="text-4xl md:text-5xl font-bold mb-4 text-foreground">
+        {t.services.title}
       </h2>
-
-      <p class="text-xl text-gray-400 max-w-3xl mx-auto">
-        Comprehensive data solutions tailored to transform your business
+      <p class="text-lg text-muted-foreground max-w-2xl mx-auto">
+        {t.services.subtitle}
       </p>
     </div>
 
-    <!-- Services Grid -->
-    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-      {services.map((service, index) => (
-        <GlowingCard client:visible delay={index * 0.1}>
-          <div class="space-y-4">
-            <!-- Icon with Gradient Background -->
-            <div class={`relative inline-flex p-4 rounded-xl bg-gradient-to-br ${service.color} bg-opacity-10`}>
-              <service.icon className="w-8 h-8 text-white" />
-              <div class={`absolute inset-0 rounded-xl bg-gradient-to-br ${service.color} opacity-20 blur-xl`}></div>
-            </div>
-
-            <!-- Title -->
-            <h3 class="text-xl font-bold text-white">
-              {service.title}
-            </h3>
-
-            <!-- Description -->
-            <p class="text-gray-400 text-sm leading-relaxed">
-              {service.description}
-            </p>
+    <!-- Core Services - 3 Column Grid -->
+    <div class="grid md:grid-cols-3 gap-6 md:gap-8 mb-16">
+      {coreServices.map((service) => (
+        <div class="p-8 rounded-2xl transition-all duration-300 bg-card border border-border hover:border-primary/30 hover:shadow-lg">
+          <!-- Icon -->
+          <div class="inline-flex items-center justify-center p-3 rounded-xl bg-primary/10 border border-primary/20 mb-6">
+            <service.icon className="w-7 h-7 text-primary" strokeWidth={1.5} />
           </div>
-        </GlowingCard>
+
+          <!-- Title -->
+          <h3 class="text-xl font-bold text-card-foreground mb-3">
+            {service.title}
+          </h3>
+
+          <!-- Description -->
+          <p class="text-muted-foreground mb-6 leading-relaxed">
+            {service.description}
+          </p>
+
+          <!-- Features list -->
+          {service.features && (
+            <ul class="space-y-2">
+              {service.features.map((feature: string) => (
+                <li class="flex items-center gap-2 text-sm text-card-foreground">
+                  <span class="w-1.5 h-1.5 rounded-full bg-primary flex-shrink-0"></span>
+                  {feature}
+                </li>
+              ))}
+            </ul>
+          )}
+
+          <!-- Learn more link -->
+          <a href="#contact" class="inline-flex items-center gap-1 mt-6 text-primary hover:text-primary/80 transition-colors text-sm font-medium group">
+            {t.services.learnMore}
+            <span class="transition-transform group-hover:translate-x-1">→</span>
+          </a>
+        </div>
       ))}
     </div>
 
-    <!-- Bottom CTA -->
-    <div class="mt-20 text-center">
-      <div class="relative group">
-        <!-- Glow effect -->
-        <div class="absolute -inset-1 bg-gradient-to-r from-ibero-red to-ibero-yellow rounded-3xl blur-xl opacity-30 group-hover:opacity-50 transition duration-500"></div>
+    <!-- Secondary Services - Smaller, 3 column -->
+    <div class="border-t border-border pt-12">
+      <h3 class="text-center text-muted-foreground text-sm uppercase tracking-wider mb-8">
+        {t.services.additionalServices}
+      </h3>
+      <div class="grid md:grid-cols-3 gap-6">
+        {secondaryServices.map((service) => (
+          <div class="flex items-start gap-4 p-5 rounded-xl bg-card border border-border hover:border-primary/30 transition-colors">
+            <div class="inline-flex items-center justify-center p-2.5 rounded-xl bg-primary/10 border border-primary/20 flex-shrink-0">
+              <service.icon className="w-5 h-5 text-primary" strokeWidth={1.5} />
+            </div>
+            <div>
+              <h4 class="font-semibold text-card-foreground mb-1">{service.title}</h4>
+              <p class="text-sm text-muted-foreground">{service.description}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
 
-        <div class="relative inline-flex flex-col items-center gap-6 px-12 py-10 bg-gray-950/90 backdrop-blur-xl rounded-3xl border border-white/10">
-          <h3 class="text-2xl font-bold gradient-text-fire">
-            Ready to Transform Your Data?
-          </h3>
-          <p class="text-lg text-gray-400 max-w-md">
-            Let's build something amazing together. Get in touch to discuss your project.
-          </p>
-          <button class="group/btn relative px-8 py-4 font-semibold text-white rounded-full overflow-hidden transition-all duration-300 hover:scale-105">
-            <div class="absolute inset-0 bg-gradient-to-r from-ibero-red via-orange-600 to-ibero-yellow transition-all duration-300"></div>
-            <a href="#contact" class="relative flex items-center gap-2">
-              Start Your Project
-              <span class="group-hover/btn:translate-x-1 transition-transform">→</span>
-            </a>
-          </button>
-        </div>
+    <!-- Bottom CTA -->
+    <div class="mt-16 text-center">
+      <div class="inline-flex flex-col items-center gap-4 px-8 py-8 md:px-12 md:py-10 bg-card rounded-2xl border border-border shadow-lg">
+        <h3 class="text-xl md:text-2xl font-bold text-card-foreground">
+          {t.services.ctaTitle}
+        </h3>
+        <p class="text-muted-foreground max-w-md">
+          {t.services.ctaDescription}
+        </p>
+        <a href="#contact" class="inline-flex items-center gap-2 mt-2 px-7 py-3.5 font-semibold text-primary-foreground rounded-lg bg-primary hover:bg-primary/90 transition-colors shadow-md">
+          {t.services.ctaButton}
+          <span>→</span>
+        </a>
       </div>
     </div>
   </div>

@@ -93,7 +93,7 @@ export default function ContactForm({ translations }: ContactFormProps) {
       <div>
         <label
           htmlFor="name"
-          className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
+          className="block text-sm font-medium text-foreground mb-2"
         >
           {translations.contact.name}
         </label>
@@ -103,14 +103,14 @@ export default function ContactForm({ translations }: ContactFormProps) {
           value={formData.name}
           onChange={(e) => setFormData({ ...formData, name: e.target.value })}
           placeholder={translations.contact.namePlaceholder}
-          className={`w-full px-4 py-3 rounded-lg bg-white/80 dark:bg-gray-800/80 backdrop-blur-md border ${
+          className={`w-full px-4 py-3 rounded-lg bg-background border ${
             errors.name
-              ? "border-red-500"
-              : "border-gray-300 dark:border-gray-600"
-          } focus:outline-none focus:ring-2 focus:ring-ibero-yellow transition-all`}
+              ? "border-destructive"
+              : "border-border"
+          } focus:outline-none focus:ring-2 focus:ring-primary transition-all text-foreground placeholder:text-muted-foreground`}
         />
         {errors.name && (
-          <p className="mt-1 text-sm text-red-500">{errors.name}</p>
+          <p className="mt-1 text-sm text-destructive">{errors.name}</p>
         )}
       </div>
 
@@ -118,7 +118,7 @@ export default function ContactForm({ translations }: ContactFormProps) {
       <div>
         <label
           htmlFor="email"
-          className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
+          className="block text-sm font-medium text-foreground mb-2"
         >
           {translations.contact.email}
         </label>
@@ -128,14 +128,14 @@ export default function ContactForm({ translations }: ContactFormProps) {
           value={formData.email}
           onChange={(e) => setFormData({ ...formData, email: e.target.value })}
           placeholder={translations.contact.emailPlaceholder}
-          className={`w-full px-4 py-3 rounded-lg bg-white/80 dark:bg-gray-800/80 backdrop-blur-md border ${
+          className={`w-full px-4 py-3 rounded-lg bg-background border ${
             errors.email
-              ? "border-red-500"
-              : "border-gray-300 dark:border-gray-600"
-          } focus:outline-none focus:ring-2 focus:ring-ibero-yellow transition-all`}
+              ? "border-destructive"
+              : "border-border"
+          } focus:outline-none focus:ring-2 focus:ring-primary transition-all text-foreground placeholder:text-muted-foreground`}
         />
         {errors.email && (
-          <p className="mt-1 text-sm text-red-500">{errors.email}</p>
+          <p className="mt-1 text-sm text-destructive">{errors.email}</p>
         )}
       </div>
 
@@ -143,7 +143,7 @@ export default function ContactForm({ translations }: ContactFormProps) {
       <div>
         <label
           htmlFor="message"
-          className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
+          className="block text-sm font-medium text-foreground mb-2"
         >
           {translations.contact.message}
         </label>
@@ -155,14 +155,14 @@ export default function ContactForm({ translations }: ContactFormProps) {
             setFormData({ ...formData, message: e.target.value })
           }
           placeholder={translations.contact.messagePlaceholder}
-          className={`w-full px-4 py-3 rounded-lg bg-white/80 dark:bg-gray-800/80 backdrop-blur-md border ${
+          className={`w-full px-4 py-3 rounded-lg bg-background border ${
             errors.message
-              ? "border-red-500"
-              : "border-gray-300 dark:border-gray-600"
-          } focus:outline-none focus:ring-2 focus:ring-ibero-yellow transition-all resize-none`}
+              ? "border-destructive"
+              : "border-border"
+          } focus:outline-none focus:ring-2 focus:ring-primary transition-all resize-none text-foreground placeholder:text-muted-foreground`}
         />
         {errors.message && (
-          <p className="mt-1 text-sm text-red-500">{errors.message}</p>
+          <p className="mt-1 text-sm text-destructive">{errors.message}</p>
         )}
       </div>
 
@@ -170,15 +170,15 @@ export default function ContactForm({ translations }: ContactFormProps) {
       <button
         type="submit"
         disabled={status === "loading"}
-        className={`w-full px-6 py-3 rounded-lg font-semibold text-white transition-all duration-300 flex items-center justify-center space-x-2 ${
+        className={`w-full px-6 py-3 rounded-lg font-semibold text-primary-foreground transition-all duration-300 flex items-center justify-center space-x-2 ${
           status === "loading"
-            ? "bg-gray-400 cursor-not-allowed"
-            : "bg-gradient-to-r from-ibero-red to-ibero-red/80 hover:shadow-2xl hover:scale-105"
+            ? "bg-muted cursor-not-allowed text-muted-foreground"
+            : "bg-primary hover:bg-primary/90 shadow-md"
         }`}
       >
         {status === "loading" ? (
           <>
-            <div className="animate-spin rounded-full h-5 w-5 border-2 border-white border-t-transparent"></div>
+            <div className="animate-spin rounded-full h-5 w-5 border-2 border-primary-foreground border-t-transparent"></div>
             <span>{translations.contact.sending}</span>
           </>
         ) : (
@@ -191,18 +191,18 @@ export default function ContactForm({ translations }: ContactFormProps) {
 
       {/* Status Messages */}
       {status === "success" && (
-        <div className="p-4 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center space-x-2">
+        <div className="p-4 bg-green-100 rounded-lg flex items-center space-x-2">
           <CheckCircle className="w-5 h-5 text-green-600" />
-          <span className="text-green-700 dark:text-green-400">
+          <span className="text-green-700">
             {translations.contact.success}
           </span>
         </div>
       )}
 
       {status === "error" && (
-        <div className="p-4 bg-red-100 dark:bg-red-900/30 rounded-lg flex items-center space-x-2">
+        <div className="p-4 bg-red-100 rounded-lg flex items-center space-x-2">
           <AlertCircle className="w-5 h-5 text-red-600" />
-          <span className="text-red-700 dark:text-red-400">
+          <span className="text-red-700">
             {translations.contact.error}
           </span>
         </div>
