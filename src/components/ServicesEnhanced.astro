@@ -1,5 +1,5 @@
 ---
-import { Database, BarChart3, Code, BookOpen, Headphones, Users } from 'lucide-react';
+import { Database, BarChart3, Code, BookOpen, Headphones, Users, Sparkles, ArrowRight } from 'lucide-react';
 import { getLangFromUrl, getTranslations } from '../lib/i18n';
 
 const lang = getLangFromUrl(Astro.url);
@@ -119,8 +119,35 @@ const secondaryServices = [
       </div>
     </div>
 
+    <!-- Free Tool Banner -->
+    <div class="mt-16 p-6 md:p-8 rounded-2xl bg-gradient-to-r from-primary/5 via-primary/10 to-accent/5 border border-primary/20">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+        <div class="flex items-start gap-4">
+          <div class="p-3 rounded-xl bg-primary/10 border border-primary/20 flex-shrink-0">
+            <Sparkles className="w-6 h-6 text-primary" />
+          </div>
+          <div>
+            <div class="flex items-center gap-2 mb-1">
+              <h3 class="text-lg font-bold text-foreground">Free MarTech Audit Tool</h3>
+              <span class="px-2 py-0.5 text-xs font-medium bg-primary/20 text-primary rounded-full">New</span>
+            </div>
+            <p class="text-muted-foreground">
+              Analyze your website's tracking setup, GDPR compliance, and performance in seconds. Detect GTM, GA4, Meta Pixel, consent platforms, and 25+ more tools.
+            </p>
+          </div>
+        </div>
+        <a
+          href="/tools/website-audit"
+          class="inline-flex items-center gap-2 px-6 py-3 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold rounded-xl transition-colors whitespace-nowrap"
+        >
+          Try It Free
+          <ArrowRight className="w-4 h-4" />
+        </a>
+      </div>
+    </div>
+
     <!-- Bottom CTA -->
-    <div class="mt-16 text-center">
+    <div class="mt-12 text-center">
       <div class="inline-flex flex-col items-center gap-4 px-8 py-8 md:px-12 md:py-10 bg-card rounded-2xl border border-border shadow-lg">
         <h3 class="text-xl md:text-2xl font-bold text-card-foreground">
           {t.services.ctaTitle}

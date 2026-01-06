@@ -24,6 +24,14 @@ export default function LanguageSwitcher({
       pathSegments.shift();
     }
 
+    // Legal pages are English-only - redirect to home when switching languages
+    const legalPages = ["legal", "privacy", "cookies", "terms"];
+    const isLegalPage = legalPages.some((page) => pathSegments[0] === page);
+    if (isLegalPage) {
+      window.location.href = langCode === "en" ? "/" : `/${langCode}/`;
+      return;
+    }
+
     // Build new path
     const newPath =
       langCode === "en"

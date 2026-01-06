@@ -1,83 +1,139 @@
 ---
 import { getLangFromUrl, getTranslations } from "../lib/i18n";
-import { Github, Linkedin } from "lucide-react";
+import { Github, Linkedin, Mail, MapPin, ArrowUpRight } from "lucide-react";
 
 const lang = getLangFromUrl(Astro.url);
 const t = getTranslations(lang);
 const currentYear = new Date().getFullYear();
+
+const quickLinks = [
+  { href: "#home", label: t.header.home },
+  { href: "#services", label: t.header.services },
+  { href: "#products", label: t.header.products },
+  { href: "#about", label: t.header.about },
+  { href: "#contact", label: t.header.contact },
+];
+
+const legalLinks = [
+  { href: "/legal", label: lang === "es" ? "Aviso Legal" : "Legal" },
+  { href: "/privacy", label: lang === "es" ? "Privacidad" : "Privacy" },
+  { href: "/cookies", label: "Cookies" },
+  { href: "/terms", label: lang === "es" ? "Términos" : "Terms" },
+];
 ---
 
-<footer class="bg-foreground text-background py-12">
-  <div class="container mx-auto px-6">
-    <div class="flex flex-col md:flex-row items-center justify-between gap-8">
-      <!-- Logo and Copyright -->
-      <div class="flex items-center space-x-3">
-        <img src="/logo.png" alt="Ibero Data" class="h-8 w-auto" />
-        <div>
-          <p class="text-sm text-background/70">
-            Ibero Data © {currentYear}. {t.footer.allRightsReserved}
-          </p>
+<footer class="bg-foreground text-background">
+  <!-- Main Footer -->
+  <div class="container mx-auto px-6 py-16">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
+      <!-- Brand -->
+      <div class="lg:col-span-1">
+        <a href="/" class="inline-flex items-center gap-3 mb-4">
+          <img src="/logo.png" alt="Ibero Data" class="h-10 w-auto" />
+        </a>
+        <p class="text-background/60 text-sm leading-relaxed mb-6">
+          {lang === "es"
+            ? "Consultoría especializada en ingeniería de datos, analítica y soluciones personalizadas."
+            : "Specialized consultancy in data engineering, analytics, and custom solutions."}
+        </p>
+        <!-- Social Links -->
+        <div class="flex gap-3">
+          <a
+            href="https://github.com/ibero-data"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="p-2.5 bg-background/10 rounded-lg hover:bg-background/20 transition-colors group"
+            aria-label="GitHub"
+          >
+            <Github className="w-5 h-5 text-background/70 group-hover:text-background transition-colors" />
+          </a>
+          <a
+            href="https://www.linkedin.com/company/iberodata/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="p-2.5 bg-background/10 rounded-lg hover:bg-background/20 transition-colors group"
+            aria-label="LinkedIn"
+          >
+            <Linkedin className="w-5 h-5 text-background/70 group-hover:text-background transition-colors" />
+          </a>
         </div>
       </div>
 
       <!-- Quick Links -->
-      <div class="flex flex-wrap justify-center gap-6">
-        <a
-          href="#home"
-          class="text-background/70 hover:text-background transition-colors text-sm"
-        >
-          {t.header.home}
-        </a>
-        <a
-          href="#services"
-          class="text-background/70 hover:text-background transition-colors text-sm"
-        >
-          {t.header.services}
-        </a>
-        <a
-          href="#products"
-          class="text-background/70 hover:text-background transition-colors text-sm"
-        >
-          {t.header.products}
-        </a>
-        <a
-          href="#about"
-          class="text-background/70 hover:text-background transition-colors text-sm"
-        >
-          {t.header.about}
-        </a>
-        <a
-          href="#contact"
-          class="text-background/70 hover:text-background transition-colors text-sm"
-        >
-          {t.header.contact}
-        </a>
+      <div>
+        <h3 class="text-sm font-semibold text-background uppercase tracking-wider mb-4">
+          {lang === "es" ? "Navegación" : "Navigation"}
+        </h3>
+        <ul class="space-y-3">
+          {quickLinks.map((link) => (
+            <li>
+              <a
+                href={link.href}
+                class="text-background/60 hover:text-background transition-colors text-sm inline-flex items-center gap-1 group"
+              >
+                {link.label}
+                <ArrowUpRight className="w-3 h-3 opacity-0 -translate-y-0.5 translate-x-0 group-hover:opacity-100 group-hover:translate-y-0 transition-all" />
+              </a>
+            </li>
+          ))}
+        </ul>
       </div>
 
-      <!-- Social Links -->
-      <div class="flex space-x-3">
-        <a
-          href="https://github.com/ibero-data"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="p-2.5 bg-background/10 rounded-lg hover:bg-background/20 transition-colors group"
-          aria-label="GitHub"
-        >
-          <Github
-            className="w-5 h-5 text-background/70 group-hover:text-background"
-          />
-        </a>
-        <a
-          href="https://www.linkedin.com/company/iberodata/"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="p-2.5 bg-background/10 rounded-lg hover:bg-background/20 transition-colors group"
-          aria-label="LinkedIn"
-        >
-          <Linkedin
-            className="w-5 h-5 text-background/70 group-hover:text-background"
-          />
-        </a>
+      <!-- Contact -->
+      <div>
+        <h3 class="text-sm font-semibold text-background uppercase tracking-wider mb-4">
+          {lang === "es" ? "Contacto" : "Contact"}
+        </h3>
+        <ul class="space-y-4">
+          <li>
+            <a
+              href="mailto:info@iberodata.es"
+              class="flex items-start gap-3 text-background/60 hover:text-background transition-colors group"
+            >
+              <Mail className="w-4 h-4 mt-0.5 flex-shrink-0" />
+              <span class="text-sm">info@iberodata.es</span>
+            </a>
+          </li>
+          <li class="flex items-start gap-3 text-background/60">
+            <MapPin className="w-4 h-4 mt-0.5 flex-shrink-0" />
+            <span class="text-sm">Alicante, Spain</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Legal -->
+      <div>
+        <h3 class="text-sm font-semibold text-background uppercase tracking-wider mb-4">
+          {lang === "es" ? "Legal" : "Legal"}
+        </h3>
+        <ul class="space-y-3">
+          {legalLinks.map((link) => (
+            <li>
+              <a
+                href={link.href}
+                class="text-background/60 hover:text-background transition-colors text-sm"
+              >
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom Bar -->
+  <div class="border-t border-background/10">
+    <div class="container mx-auto px-6 py-6">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+        <p class="text-background/50 text-sm">
+          © {currentYear} Ibero Data. {t.footer.allRightsReserved}
+        </p>
+        <p class="text-background/40 text-xs">
+          {lang === "es"
+            ? "Hecho con datos y café en España"
+            : "Made with data & coffee in Spain"}
+        </p>
       </div>
     </div>
   </div>

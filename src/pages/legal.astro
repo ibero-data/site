@@ -1,0 +1,145 @@
+---
+import Layout from "../layouts/main.astro";
+import { getLangFromUrl, getTranslations } from "../lib/i18n";
+
+const lang = getLangFromUrl(Astro.url);
+const t = getTranslations(lang);
+---
+
+<Layout title={lang === "es" ? "Aviso Legal - Ibero Data" : "Legal Notice - Ibero Data"}>
+  <section class="py-24 md:py-32 bg-background">
+    <div class="container mx-auto px-6">
+      <div class="max-w-3xl mx-auto prose prose-slate">
+        {lang === "es" ? (
+          <>
+            <h1 class="text-4xl font-bold mb-8 text-foreground">Aviso Legal</h1>
+
+            <p class="text-muted-foreground mb-6">Última actualización: Enero 2025</p>
+
+            <h2 class="text-2xl font-semibold mt-8 mb-4 text-foreground">1. Identificación del Titular</h2>
+            <p class="text-muted-foreground mb-4">
+              En cumplimiento del artículo 10 de la Ley 34/2002, de 11 de julio, de Servicios de la Sociedad de la Información y de Comercio Electrónico (LSSI-CE), se informa:
+            </p>
+            <ul class="list-disc pl-6 text-muted-foreground mb-6 space-y-2">
+              <li><strong class="text-foreground">Denominación:</strong> Ibero Data</li>
+              <li><strong class="text-foreground">Domicilio:</strong> Alicante, España</li>
+              <li><strong class="text-foreground">Email:</strong> info@iberodata.es</li>
+              <li><strong class="text-foreground">Sitio Web:</strong> https://iberodata.es</li>
+            </ul>
+
+            <h2 class="text-2xl font-semibold mt-8 mb-4 text-foreground">2. Objeto y Ámbito de Aplicación</h2>
+            <p class="text-muted-foreground mb-4">
+              Este aviso legal regula el acceso y uso del sitio web iberodata.es (en adelante, el "Sitio Web"), propiedad de Ibero Data. El acceso al Sitio Web atribuye la condición de usuario e implica la aceptación plena de todas las condiciones incluidas en este Aviso Legal.
+            </p>
+
+            <h2 class="text-2xl font-semibold mt-8 mb-4 text-foreground">3. Actividad</h2>
+            <p class="text-muted-foreground mb-4">
+              Ibero Data es una consultoría especializada en ingeniería de datos, analítica y desarrollo de soluciones personalizadas para empresas. Nuestros servicios incluyen:
+            </p>
+            <ul class="list-disc pl-6 text-muted-foreground mb-6 space-y-2">
+              <li>Ingeniería de datos y pipelines</li>
+              <li>Analítica y dashboards</li>
+              <li>Desarrollo de software personalizado</li>
+              <li>Formación y consultoría técnica</li>
+              <li>Desarrollo y mantenimiento de herramientas open-source</li>
+            </ul>
+
+            <h2 class="text-2xl font-semibold mt-8 mb-4 text-foreground">4. Propiedad Intelectual</h2>
+            <p class="text-muted-foreground mb-4">
+              Todos los contenidos del Sitio Web, incluyendo textos, fotografías, gráficos, imágenes, iconos, tecnología, software, enlaces y demás contenidos audiovisuales o sonoros, así como su diseño gráfico y códigos fuente, son propiedad intelectual de Ibero Data o de terceros, sin que puedan entenderse cedidos al usuario ninguno de los derechos de explotación reconocidos por la normativa vigente en materia de propiedad intelectual.
+            </p>
+
+            <h2 class="text-2xl font-semibold mt-8 mb-4 text-foreground">5. Responsabilidad</h2>
+            <p class="text-muted-foreground mb-4">
+              Ibero Data no se hace responsable de los daños y perjuicios que pudieran derivarse de:
+            </p>
+            <ul class="list-disc pl-6 text-muted-foreground mb-6 space-y-2">
+              <li>La falta de disponibilidad o accesibilidad al Sitio Web</li>
+              <li>La interrupción del funcionamiento del Sitio Web</li>
+              <li>Los fallos informáticos de cualquier tipo</li>
+              <li>Los daños causados por terceros mediante intromisiones ilegítimas</li>
+            </ul>
+
+            <h2 class="text-2xl font-semibold mt-8 mb-4 text-foreground">6. Enlaces Externos</h2>
+            <p class="text-muted-foreground mb-4">
+              El Sitio Web puede contener enlaces a sitios de terceros. Ibero Data no se responsabiliza del contenido ni de las condiciones de uso de dichos sitios.
+            </p>
+
+            <h2 class="text-2xl font-semibold mt-8 mb-4 text-foreground">7. Legislación Aplicable y Jurisdicción</h2>
+            <p class="text-muted-foreground mb-4">
+              Las presentes condiciones se rigen por la legislación española. Para cualquier controversia que pudiera derivarse del acceso o uso del Sitio Web, las partes se someten a los Juzgados y Tribunales de Alicante, España.
+            </p>
+
+            <div class="mt-12 pt-8 border-t border-border">
+              <a href="/" class="text-primary hover:text-primary/80 transition-colors">← Volver al inicio</a>
+            </div>
+          </>
+        ) : (
+          <>
+            <h1 class="text-4xl font-bold mb-8 text-foreground">Legal Notice</h1>
+
+            <p class="text-muted-foreground mb-6">Last updated: January 2025</p>
+
+            <h2 class="text-2xl font-semibold mt-8 mb-4 text-foreground">1. Owner Identification</h2>
+            <p class="text-muted-foreground mb-4">
+              In compliance with Article 10 of Spanish Law 34/2002, of July 11, on Information Society Services and Electronic Commerce (LSSI-CE):
+            </p>
+            <ul class="list-disc pl-6 text-muted-foreground mb-6 space-y-2">
+              <li><strong class="text-foreground">Name:</strong> Ibero Data</li>
+              <li><strong class="text-foreground">Address:</strong> Alicante, Spain</li>
+              <li><strong class="text-foreground">Email:</strong> info@iberodata.es</li>
+              <li><strong class="text-foreground">Website:</strong> https://iberodata.es</li>
+            </ul>
+
+            <h2 class="text-2xl font-semibold mt-8 mb-4 text-foreground">2. Purpose and Scope</h2>
+            <p class="text-muted-foreground mb-4">
+              This legal notice governs the access and use of the website iberodata.es (hereinafter, the "Website"), owned by Ibero Data. Access to the Website grants user status and implies full acceptance of all conditions included in this Legal Notice.
+            </p>
+
+            <h2 class="text-2xl font-semibold mt-8 mb-4 text-foreground">3. Activity</h2>
+            <p class="text-muted-foreground mb-4">
+              Ibero Data is a consultancy specializing in data engineering, analytics, and custom solutions for businesses. Our services include:
+            </p>
+            <ul class="list-disc pl-6 text-muted-foreground mb-6 space-y-2">
+              <li>Data engineering and pipelines</li>
+              <li>Analytics and dashboards</li>
+              <li>Custom software development</li>
+              <li>Training and technical consulting</li>
+              <li>Open-source tool development and maintenance</li>
+            </ul>
+
+            <h2 class="text-2xl font-semibold mt-8 mb-4 text-foreground">4. Intellectual Property</h2>
+            <p class="text-muted-foreground mb-4">
+              All content on the Website, including texts, photographs, graphics, images, icons, technology, software, links, and other audiovisual or sound content, as well as its graphic design and source codes, are the intellectual property of Ibero Data or third parties. No exploitation rights recognized by current intellectual property regulations are deemed to be transferred to the user.
+            </p>
+
+            <h2 class="text-2xl font-semibold mt-8 mb-4 text-foreground">5. Liability</h2>
+            <p class="text-muted-foreground mb-4">
+              Ibero Data is not responsible for damages that may arise from:
+            </p>
+            <ul class="list-disc pl-6 text-muted-foreground mb-6 space-y-2">
+              <li>Lack of availability or accessibility to the Website</li>
+              <li>Interruption of Website operation</li>
+              <li>Computer failures of any kind</li>
+              <li>Damages caused by third parties through illegitimate intrusions</li>
+            </ul>
+
+            <h2 class="text-2xl font-semibold mt-8 mb-4 text-foreground">6. External Links</h2>
+            <p class="text-muted-foreground mb-4">
+              The Website may contain links to third-party sites. Ibero Data is not responsible for the content or terms of use of such sites.
+            </p>
+
+            <h2 class="text-2xl font-semibold mt-8 mb-4 text-foreground">7. Applicable Law and Jurisdiction</h2>
+            <p class="text-muted-foreground mb-4">
+              These conditions are governed by Spanish law. For any dispute arising from access to or use of the Website, the parties submit to the Courts and Tribunals of Alicante, Spain.
+            </p>
+
+            <div class="mt-12 pt-8 border-t border-border">
+              <a href="/" class="text-primary hover:text-primary/80 transition-colors">← Back to home</a>
+            </div>
+          </>
+        )}
+      </div>
+    </div>
+  </section>
+</Layout>

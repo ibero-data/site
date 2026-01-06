@@ -1,0 +1,199 @@
+---
+import Layout from "../layouts/main.astro";
+import { getLangFromUrl, getTranslations } from "../lib/i18n";
+
+const lang = getLangFromUrl(Astro.url);
+const t = getTranslations(lang);
+---
+
+<Layout title={lang === "es" ? "Términos de Servicio - Ibero Data" : "Terms of Service - Ibero Data"}>
+  <section class="py-24 md:py-32 bg-background">
+    <div class="container mx-auto px-6">
+      <div class="max-w-3xl mx-auto prose prose-slate">
+        {lang === "es" ? (
+          <>
+            <h1 class="text-4xl font-bold mb-8 text-foreground">Términos de Servicio</h1>
+
+            <p class="text-muted-foreground mb-6">Última actualización: Enero 2025</p>
+
+            <p class="text-muted-foreground mb-6">
+              Estos términos regulan el uso del sitio web iberodata.es y los servicios ofrecidos por Ibero Data.
+            </p>
+
+            <h2 class="text-2xl font-semibold mt-8 mb-4 text-foreground">1. Aceptación de los Términos</h2>
+            <p class="text-muted-foreground mb-4">
+              Al acceder y utilizar este sitio web, aceptas estos términos de servicio en su totalidad. Si no estás de acuerdo con estos términos, no utilices este sitio web.
+            </p>
+
+            <h2 class="text-2xl font-semibold mt-8 mb-4 text-foreground">2. Descripción del Servicio</h2>
+            <p class="text-muted-foreground mb-4">
+              Ibero Data ofrece servicios de consultoría en:
+            </p>
+            <ul class="list-disc pl-6 text-muted-foreground mb-6 space-y-2">
+              <li>Ingeniería de datos</li>
+              <li>Analítica y business intelligence</li>
+              <li>Desarrollo de software personalizado</li>
+              <li>Formación y consultoría técnica</li>
+              <li>Desarrollo de herramientas open-source</li>
+            </ul>
+            <p class="text-muted-foreground mb-4">
+              Los servicios específicos, plazos y precios se acordarán por escrito antes de iniciar cualquier proyecto.
+            </p>
+
+            <h2 class="text-2xl font-semibold mt-8 mb-4 text-foreground">3. Uso del Sitio Web</h2>
+            <p class="text-muted-foreground mb-4">Te comprometes a:</p>
+            <ul class="list-disc pl-6 text-muted-foreground mb-6 space-y-2">
+              <li>Usar el sitio web solo para fines legales</li>
+              <li>No intentar acceder a áreas restringidas</li>
+              <li>No interferir con el funcionamiento del sitio</li>
+              <li>No transmitir virus u otro código malicioso</li>
+              <li>Proporcionar información veraz en los formularios de contacto</li>
+            </ul>
+
+            <h2 class="text-2xl font-semibold mt-8 mb-4 text-foreground">4. Propiedad Intelectual</h2>
+            <p class="text-muted-foreground mb-4">
+              Todo el contenido del sitio web (textos, gráficos, logos, imágenes, código) es propiedad de Ibero Data o de sus respectivos titulares y está protegido por las leyes de propiedad intelectual.
+            </p>
+            <p class="text-muted-foreground mb-4">
+              Nuestras herramientas open-source (CH-UI, DuckUI) se distribuyen bajo sus respectivas licencias de código abierto.
+            </p>
+
+            <h2 class="text-2xl font-semibold mt-8 mb-4 text-foreground">5. Confidencialidad</h2>
+            <p class="text-muted-foreground mb-4">
+              Tratamos toda la información de nuestros clientes como confidencial. Los detalles específicos de confidencialidad se establecerán en los contratos de servicio individuales.
+            </p>
+
+            <h2 class="text-2xl font-semibold mt-8 mb-4 text-foreground">6. Limitación de Responsabilidad</h2>
+            <p class="text-muted-foreground mb-4">
+              Ibero Data no será responsable por:
+            </p>
+            <ul class="list-disc pl-6 text-muted-foreground mb-6 space-y-2">
+              <li>Daños indirectos o consecuentes</li>
+              <li>Pérdida de datos o beneficios</li>
+              <li>Interrupciones del servicio</li>
+              <li>Errores u omisiones en el contenido del sitio</li>
+            </ul>
+            <p class="text-muted-foreground mb-4">
+              Esta limitación no se aplica en casos de negligencia grave o dolo.
+            </p>
+
+            <h2 class="text-2xl font-semibold mt-8 mb-4 text-foreground">7. Enlaces Externos</h2>
+            <p class="text-muted-foreground mb-4">
+              Este sitio puede contener enlaces a sitios web de terceros. No somos responsables del contenido o las prácticas de privacidad de dichos sitios.
+            </p>
+
+            <h2 class="text-2xl font-semibold mt-8 mb-4 text-foreground">8. Modificaciones</h2>
+            <p class="text-muted-foreground mb-4">
+              Nos reservamos el derecho de modificar estos términos en cualquier momento. Los cambios entrarán en vigor desde su publicación en el sitio web.
+            </p>
+
+            <h2 class="text-2xl font-semibold mt-8 mb-4 text-foreground">9. Legislación Aplicable</h2>
+            <p class="text-muted-foreground mb-4">
+              Estos términos se rigen por la legislación española. Para cualquier controversia, las partes se someten a los Juzgados y Tribunales de Alicante, España.
+            </p>
+
+            <h2 class="text-2xl font-semibold mt-8 mb-4 text-foreground">10. Contacto</h2>
+            <p class="text-muted-foreground mb-4">
+              Para cualquier consulta sobre estos términos, contacta con nosotros en <a href="mailto:info@iberodata.es" class="text-primary hover:text-primary/80">info@iberodata.es</a>
+            </p>
+
+            <div class="mt-12 pt-8 border-t border-border">
+              <a href="/" class="text-primary hover:text-primary/80 transition-colors">← Volver al inicio</a>
+            </div>
+          </>
+        ) : (
+          <>
+            <h1 class="text-4xl font-bold mb-8 text-foreground">Terms of Service</h1>
+
+            <p class="text-muted-foreground mb-6">Last updated: January 2025</p>
+
+            <p class="text-muted-foreground mb-6">
+              These terms govern the use of the website iberodata.es and services offered by Ibero Data.
+            </p>
+
+            <h2 class="text-2xl font-semibold mt-8 mb-4 text-foreground">1. Acceptance of Terms</h2>
+            <p class="text-muted-foreground mb-4">
+              By accessing and using this website, you accept these terms of service in full. If you do not agree with these terms, do not use this website.
+            </p>
+
+            <h2 class="text-2xl font-semibold mt-8 mb-4 text-foreground">2. Service Description</h2>
+            <p class="text-muted-foreground mb-4">
+              Ibero Data offers consulting services in:
+            </p>
+            <ul class="list-disc pl-6 text-muted-foreground mb-6 space-y-2">
+              <li>Data engineering</li>
+              <li>Analytics and business intelligence</li>
+              <li>Custom software development</li>
+              <li>Training and technical consulting</li>
+              <li>Open-source tool development</li>
+            </ul>
+            <p class="text-muted-foreground mb-4">
+              Specific services, timelines, and pricing will be agreed in writing before starting any project.
+            </p>
+
+            <h2 class="text-2xl font-semibold mt-8 mb-4 text-foreground">3. Website Use</h2>
+            <p class="text-muted-foreground mb-4">You agree to:</p>
+            <ul class="list-disc pl-6 text-muted-foreground mb-6 space-y-2">
+              <li>Use the website only for lawful purposes</li>
+              <li>Not attempt to access restricted areas</li>
+              <li>Not interfere with site operation</li>
+              <li>Not transmit viruses or other malicious code</li>
+              <li>Provide accurate information in contact forms</li>
+            </ul>
+
+            <h2 class="text-2xl font-semibold mt-8 mb-4 text-foreground">4. Intellectual Property</h2>
+            <p class="text-muted-foreground mb-4">
+              All website content (texts, graphics, logos, images, code) is the property of Ibero Data or their respective owners and is protected by intellectual property laws.
+            </p>
+            <p class="text-muted-foreground mb-4">
+              Our open-source tools (CH-UI, DuckUI) are distributed under their respective open-source licenses.
+            </p>
+
+            <h2 class="text-2xl font-semibold mt-8 mb-4 text-foreground">5. Confidentiality</h2>
+            <p class="text-muted-foreground mb-4">
+              We treat all client information as confidential. Specific confidentiality details will be established in individual service contracts.
+            </p>
+
+            <h2 class="text-2xl font-semibold mt-8 mb-4 text-foreground">6. Limitation of Liability</h2>
+            <p class="text-muted-foreground mb-4">
+              Ibero Data shall not be liable for:
+            </p>
+            <ul class="list-disc pl-6 text-muted-foreground mb-6 space-y-2">
+              <li>Indirect or consequential damages</li>
+              <li>Loss of data or profits</li>
+              <li>Service interruptions</li>
+              <li>Errors or omissions in site content</li>
+            </ul>
+            <p class="text-muted-foreground mb-4">
+              This limitation does not apply in cases of gross negligence or willful misconduct.
+            </p>
+
+            <h2 class="text-2xl font-semibold mt-8 mb-4 text-foreground">7. External Links</h2>
+            <p class="text-muted-foreground mb-4">
+              This site may contain links to third-party websites. We are not responsible for the content or privacy practices of such sites.
+            </p>
+
+            <h2 class="text-2xl font-semibold mt-8 mb-4 text-foreground">8. Modifications</h2>
+            <p class="text-muted-foreground mb-4">
+              We reserve the right to modify these terms at any time. Changes will take effect from the moment they are published on the website.
+            </p>
+
+            <h2 class="text-2xl font-semibold mt-8 mb-4 text-foreground">9. Applicable Law</h2>
+            <p class="text-muted-foreground mb-4">
+              These terms are governed by Spanish law. For any dispute, the parties submit to the Courts and Tribunals of Alicante, Spain.
+            </p>
+
+            <h2 class="text-2xl font-semibold mt-8 mb-4 text-foreground">10. Contact</h2>
+            <p class="text-muted-foreground mb-4">
+              For any questions about these terms, contact us at <a href="mailto:info@iberodata.es" class="text-primary hover:text-primary/80">info@iberodata.es</a>
+            </p>
+
+            <div class="mt-12 pt-8 border-t border-border">
+              <a href="/" class="text-primary hover:text-primary/80 transition-colors">← Back to home</a>
+            </div>
+          </>
+        )}
+      </div>
+    </div>
+  </section>
+</Layout>
