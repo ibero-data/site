@@ -14,8 +14,12 @@ import {
   ExternalLink,
   ChevronDown,
   ChevronUp,
+  Download,
+  X,
+  Send,
 } from "lucide-react";
 import { analyzeWebsite, calculateScores, RateLimitError, type AuditResult } from "../lib/psi-analyzer";
+import { downloadAuditPDF } from "../lib/pdf-generator";
 
 function ScoreCircle({ score, max = 10, label }: { score: number; max?: number; label: string }) {
   const percentage = (score / max) * 100;
@@ -164,6 +168,11 @@ export default function WebsiteAudit() {
   const [error, setError] = useState<string | null>(null);
   const [isRateLimited, setIsRateLimited] = useState(false);
   const [result, setResult] = useState<AuditResult | null>(null);
+  const [showEmailModal, setShowEmailModal] = useState(false);
+  const [email, setEmail] = useState("");
+  const [emailSending, setEmailSending] = useState(false);
+  const [emailSent, setEmailSent] = useState(false);
+  const [emailError, setEmailError] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -185,6 +194,38 @@ export default function WebsiteAudit() {
       }
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleEmailSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email.trim() || !result) return;
+
+    setEmailSending(true);
+    setEmailError(null);
+
+    try {
+      // For now, download PDF and open mailto
+      // In production, this would call a serverless function
+      downloadAuditPDF(result);
+
+      // Open mailto with pre-filled subject
+      const subject = encodeURIComponent(`MarTech Audit Report - ${new URL(result.url).hostname}`);
+      const body = encodeURIComponent(
+        `Hi,\n\nPlease find attached my MarTech audit report for ${result.url}.\n\nI'd like to discuss the recommendations with your team.\n\nBest regards`
+      );
+      window.open(`mailto:info@iberodata.es?subject=${subject}&body=${body}`, "_blank");
+
+      setEmailSent(true);
+      setTimeout(() => {
+        setShowEmailModal(false);
+        setEmailSent(false);
+        setEmail("");
+      }, 2000);
+    } catch (err) {
+      setEmailError("Failed to send email. Please try again.");
+    } finally {
+      setEmailSending(false);
     }
   };
 
@@ -408,6 +449,29 @@ export default function WebsiteAudit() {
             </CategorySection>
           )}
 
+          {/* Download & Share */}
+          <div className="bg-card rounded-2xl border border-border p-6">
+            <h3 className="text-lg font-semibold text-foreground mb-4 text-center">
+              Save Your Report
+            </h3>
+            <div className="flex flex-wrap justify-center gap-4">
+              <button
+                onClick={() => downloadAuditPDF(result)}
+                className="inline-flex items-center gap-2 px-6 py-3 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold rounded-xl transition-colors"
+              >
+                <Download className="w-5 h-5" />
+                Download PDF
+              </button>
+              <button
+                onClick={() => setShowEmailModal(true)}
+                className="inline-flex items-center gap-2 px-6 py-3 bg-card hover:bg-muted border border-border text-foreground font-semibold rounded-xl transition-colors"
+              >
+                <Mail className="w-5 h-5" />
+                Email Report
+              </button>
+            </div>
+          </div>
+
           {/* CTA Section */}
           <div className="bg-gradient-to-r from-primary/10 to-accent/10 rounded-2xl border border-primary/20 p-8 text-center">
             <h3 className="text-xl font-semibold text-foreground mb-2">
@@ -417,22 +481,98 @@ export default function WebsiteAudit() {
               We specialize in GTM Server-Side, GDPR compliance, and MarTech optimization. Let's talk
               about how we can improve your tracking setup.
             </p>
-            <div className="flex flex-wrap justify-center gap-4">
-              <a
-                href="/#contact"
-                className="inline-flex items-center gap-2 px-6 py-3 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold rounded-xl transition-colors"
-              >
-                <MessageCircle className="w-5 h-5" />
-                Talk to an Expert
-              </a>
-              <a
-                href="mailto:info@iberodata.es?subject=MarTech Audit Follow-up"
-                className="inline-flex items-center gap-2 px-6 py-3 bg-card hover:bg-muted border border-border text-foreground font-semibold rounded-xl transition-colors"
-              >
-                <Mail className="w-5 h-5" />
-                Email Report to Me
-              </a>
-            </div>
+            <a
+              href="/#contact"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold rounded-xl transition-colors"
+            >
+              <MessageCircle className="w-5 h-5" />
+              Talk to an Expert
+            </a>
+          </div>
+        </div>
+      )}
+
+      {/* Email Modal */}
+      {showEmailModal && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+          <div className="bg-card rounded-2xl border border-border p-6 max-w-md w-full relative animate-in fade-in zoom-in-95 duration-200">
+            <button
+              onClick={() => {
+                setShowEmailModal(false);
+                setEmailSent(false);
+                setEmailError(null);
+              }}
+              className="absolute top-4 right-4 text-muted-foreground hover:text-foreground transition-colors"
+            >
+              <X className="w-5 h-5" />
+            </button>
+
+            {emailSent ? (
+              <div className="text-center py-8">
+                <div className="w-16 h-16 bg-green-500/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <CheckCircle2 className="w-8 h-8 text-green-500" />
+                </div>
+                <h3 className="text-xl font-semibold text-foreground mb-2">PDF Downloaded!</h3>
+                <p className="text-muted-foreground">
+                  Your email client should open. Attach the downloaded PDF and send!
+                </p>
+              </div>
+            ) : (
+              <>
+                <h3 className="text-xl font-semibold text-foreground mb-2">
+                  Email Your Report
+                </h3>
+                <p className="text-muted-foreground mb-6">
+                  Enter your email and we'll prepare the report for you to send.
+                </p>
+
+                <form onSubmit={handleEmailSubmit} className="space-y-4">
+                  <div>
+                    <label htmlFor="email" className="block text-sm font-medium text-foreground mb-2">
+                      Your Email
+                    </label>
+                    <input
+                      type="email"
+                      id="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      placeholder="you@company.com"
+                      required
+                      className="w-full px-4 py-3 bg-background border border-border rounded-xl text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary"
+                    />
+                  </div>
+
+                  {emailError && (
+                    <p className="text-sm text-red-500 flex items-center gap-2">
+                      <AlertCircle className="w-4 h-4" />
+                      {emailError}
+                    </p>
+                  )}
+
+                  <button
+                    type="submit"
+                    disabled={emailSending || !email.trim()}
+                    className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-primary hover:bg-primary/90 disabled:bg-primary/50 text-primary-foreground font-semibold rounded-xl transition-colors"
+                  >
+                    {emailSending ? (
+                      <>
+                        <Loader2 className="w-5 h-5 animate-spin" />
+                        Preparing...
+                      </>
+                    ) : (
+                      <>
+                        <Send className="w-5 h-5" />
+                        Download & Email
+                      </>
+                    )}
+                  </button>
+                </form>
+
+                <p className="text-xs text-muted-foreground mt-4 text-center">
+                  The PDF will download and your email client will open with a pre-filled message.
+                </p>
+              </>
+            )}
           </div>
         </div>
       )}

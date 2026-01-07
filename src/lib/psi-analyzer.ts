@@ -1,7 +1,8 @@
 // Google PageSpeed Insights API analyzer for MarTech detection
 
 const PSI_API = "https://www.googleapis.com/pagespeedonline/v5/runPagespeed";
-const CACHE_KEY = "psi_audit_cache";
+const PSI_API_KEY = import.meta.env.PUBLIC_PSI_API_KEY || "";
+const CACHE_KEY = "psi_audit_cache_v3"; // v3 adds server-side GTM detection via first-party proxy
 const CACHE_TTL = 60 * 60 * 1000; // 1 hour in milliseconds
 
 // Custom error for rate limiting
@@ -73,25 +74,25 @@ export interface AuditResult {
 const MARTECH_PATTERNS = {
   // Google Stack
   gtm: {
-    patterns: ["googletagmanager.com/gtm.js", "googletagmanager.com/gtag/js"],
+    patterns: ["googletagmanager.com", "gtm.js", "gtag/js", "gtag.js"],
     name: "Google Tag Manager",
     category: "google" as const,
     recommendation: "Consider migrating to GTM Server-Side for better privacy compliance",
   },
   gtmServerSide: {
-    patterns: [".tagging-server.", "sgtm.", "gtm-server.", "server-side-tagging"],
+    patterns: [".tagging-server.", "sgtm.", "gtm-server.", "server-side-tagging", "/gtm/"],
     name: "GTM Server-Side",
     category: "google" as const,
     recommendation: null,
   },
   ga4: {
-    patterns: ["google-analytics.com/g/", "analytics.google.com"],
+    patterns: ["google-analytics.com", "analytics.google.com", "/g/collect", "gtag("],
     name: "Google Analytics 4",
     category: "google" as const,
     recommendation: "Ensure GA4 is configured with consent mode for GDPR compliance",
   },
   googleAds: {
-    patterns: ["googleadservices.com", "googlesyndication.com", "doubleclick.net"],
+    patterns: ["googleadservices.com", "googlesyndication.com", "doubleclick.net", "googleads.g.doubleclick.net", "pagead2.googlesyndication.com"],
     name: "Google Ads",
     category: "google" as const,
     recommendation: "Consider server-side conversion tracking for better data accuracy",
@@ -224,6 +225,67 @@ const MARTECH_PATTERNS = {
   },
 };
 
+// Google domains where /collect endpoints are expected (client-side, not server-side)
+const GOOGLE_ANALYTICS_DOMAINS = [
+  'google-analytics.com',
+  'analytics.google.com',
+  'googletagmanager.com',
+  'www.googletagmanager.com',
+  'region1.google-analytics.com',
+  'region2.google-analytics.com',
+  'region3.google-analytics.com',
+];
+
+// URL patterns that indicate GA4/GTM traffic (could be proxied through server-side GTM)
+const SGTM_PROXY_PATTERNS = [
+  '/g/collect',   // GA4 measurement protocol
+  '/j/collect',   // GA4 alternative endpoint
+  '/collect?',    // Universal Analytics
+];
+
+/**
+ * Detects server-side GTM by looking for GA/GTM traffic
+ * going to non-Google domains (first-party proxy)
+ */
+function detectServerSideGTM(urls: string[]): {
+  detected: boolean;
+  proxyDomains: string[];
+} {
+  const proxyDomains = new Set<string>();
+
+  for (const url of urls) {
+    // Check if URL matches a GA/GTM collect pattern that could be proxied
+    const matchesPattern = SGTM_PROXY_PATTERNS.some(pattern => url.includes(pattern));
+
+    if (matchesPattern) {
+      try {
+        // Handle URLs that might not have protocol
+        const fullUrl = url.startsWith('http') ? url : `https://${url}`;
+        const urlObj = new URL(fullUrl);
+        const hostname = urlObj.hostname.toLowerCase();
+
+        // Check if this is NOT a Google domain - if so, it's server-side!
+        const isGoogleDomain = GOOGLE_ANALYTICS_DOMAINS.some(
+          googleDomain =>
+            hostname === googleDomain ||
+            hostname.endsWith('.' + googleDomain)
+        );
+
+        if (!isGoogleDomain) {
+          proxyDomains.add(hostname);
+        }
+      } catch {
+        // Invalid URL, skip
+      }
+    }
+  }
+
+  return {
+    detected: proxyDomains.size > 0,
+    proxyDomains: Array.from(proxyDomains),
+  };
+}
+
 function getRating(value: number, thresholds: { good: number; poor: number }): "good" | "needs-improvement" | "poor" {
   if (value <= thresholds.good) return "good";
   if (value <= thresholds.poor) return "needs-improvement";
@@ -244,7 +306,7 @@ export async function analyzeWebsite(url: string): Promise<AuditResult> {
   }
 
   // Call PageSpeed Insights API
-  const apiUrl = `${PSI_API}?url=${encodeURIComponent(normalizedUrl)}&strategy=mobile&category=performance&category=best-practices`;
+  const apiUrl = `${PSI_API}?url=${encodeURIComponent(normalizedUrl)}&strategy=mobile&category=performance&category=best-practices${PSI_API_KEY ? `&key=${PSI_API_KEY}` : ""}`;
 
   const response = await fetch(apiUrl);
 
@@ -268,39 +330,124 @@ export async function analyzeWebsite(url: string): Promise<AuditResult> {
     throw new RateLimitError();
   }
 
-  // Extract third-party resources
+  // Extract third-party resources from multiple sources
   const thirdPartyAudit = data.lighthouseResult?.audits?.["third-party-summary"];
   const networkRequests = data.lighthouseResult?.audits?.["network-requests"];
+  const scriptTreemap = data.lighthouseResult?.audits?.["script-treemap-data"];
   const thirdPartyItems = thirdPartyAudit?.details?.items || [];
 
-  // Get all network requests for more comprehensive detection
+  // Collect all URLs and entity names for detection
   const allUrls: string[] = [];
+  const entityNames: string[] = [];
 
-  // From third-party summary
+  // From third-party summary - entity is the service NAME (e.g., "Google Tag Manager")
   thirdPartyItems.forEach((item: any) => {
-    if (item.url) allUrls.push(item.url.toLowerCase());
-    if (item.entity) allUrls.push(item.entity.toLowerCase());
+    if (item.entity) {
+      // entity can be a string or object with text property
+      const entityName = typeof item.entity === 'string' ? item.entity : item.entity?.text || '';
+      entityNames.push(entityName.toLowerCase());
+    }
+    // Some items have subItems with URLs
+    if (item.subItems?.items) {
+      item.subItems.items.forEach((subItem: any) => {
+        if (subItem.url) allUrls.push(subItem.url.toLowerCase());
+      });
+    }
   });
 
-  // From network requests
+  // From network requests - this has all the actual URLs
   if (networkRequests?.details?.items) {
     networkRequests.details.items.forEach((item: any) => {
       if (item.url) allUrls.push(item.url.toLowerCase());
     });
   }
 
+  // From script treemap data
+  if (scriptTreemap?.details?.nodes) {
+    scriptTreemap.details.nodes.forEach((node: any) => {
+      if (node.name) allUrls.push(node.name.toLowerCase());
+    });
+  }
+
+  // Special detection for server-side GTM (check for /collect on non-Google domains)
+  const sgtmResult = detectServerSideGTM(allUrls);
+
+  // Debug logging (remove in production)
+  console.log('PSI Detection Debug:', {
+    entityNames: entityNames.slice(0, 10),
+    urlCount: allUrls.length,
+    sampleUrls: allUrls.slice(0, 10),
+    sgtmDetection: sgtmResult,
+  });
+
   // Detect MarTech platforms
   const martech: MarTechDetection[] = [];
 
+  // Entity name mappings for direct matching
+  const ENTITY_MAPPINGS: Record<string, string> = {
+    "google tag manager": "gtm",
+    "google analytics": "ga4",
+    "google/doubleclick ads": "googleAds",
+    "doubleclick": "googleAds",
+    "facebook": "metaPixel",
+    "meta": "metaPixel",
+    "tiktok": "tiktokPixel",
+    "linkedin": "linkedinInsight",
+    "twitter": "twitterPixel",
+    "pinterest": "pinterestTag",
+    "cookiebot": "cookiebot",
+    "onetrust": "onetrust",
+    "hotjar": "hotjar",
+    "microsoft clarity": "clarity",
+    "clarity": "clarity",
+    "amplitude": "amplitude",
+    "mixpanel": "mixpanel",
+    "segment": "segment",
+    "heap": "heap",
+    "fullstory": "fullstory",
+  };
+
   for (const [key, config] of Object.entries(MARTECH_PATTERNS)) {
-    const detected = config.patterns.some((pattern) =>
-      allUrls.some((url) => url.includes(pattern.toLowerCase()))
-    );
+    let detected = false;
+    let details: string | undefined;
+
+    if (key === 'gtmServerSide') {
+      // Primary: Check for /collect endpoints on non-Google domains (first-party proxy)
+      detected = sgtmResult.detected;
+      if (detected) {
+        details = `First-party proxy: ${sgtmResult.proxyDomains.join(', ')}`;
+      }
+
+      // Fallback: Check subdomain patterns (sgtm., .tagging-server., etc.)
+      if (!detected) {
+        detected = config.patterns.some((pattern) =>
+          allUrls.some((url) => url.includes(pattern.toLowerCase()))
+        );
+        if (detected) {
+          details = 'Detected via subdomain pattern';
+        }
+      }
+    } else {
+      // Standard detection for other platforms
+      const detectedByUrl = config.patterns.some((pattern) =>
+        allUrls.some((url) => url.includes(pattern.toLowerCase()))
+      );
+
+      const detectedByEntity = entityNames.some((entity) => {
+        const mappedKey = Object.entries(ENTITY_MAPPINGS).find(([name]) =>
+          entity.includes(name)
+        )?.[1];
+        return mappedKey === key || entity.includes(config.name.toLowerCase());
+      });
+
+      detected = detectedByUrl || detectedByEntity;
+    }
 
     martech.push({
       name: config.name,
       category: config.category,
       detected,
+      details,
       recommendation: detected && config.recommendation ? config.recommendation : undefined,
     });
   }
@@ -383,7 +530,7 @@ export async function analyzeWebsite(url: string): Promise<AuditResult> {
     },
     thirdPartyCount: thirdPartyItems.length,
     thirdParties: thirdPartyItems.slice(0, 20).map((item: any) => ({
-      name: item.entity || "Unknown",
+      name: typeof item.entity === 'string' ? item.entity : item.entity?.text || "Unknown",
       url: item.url || "",
       transferSize: item.transferSize || 0,
     })),
